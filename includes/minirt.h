@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/22 15:48:43 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:45:00 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,17 @@ typedef struct s_data
 //Start program
 int		main(int argc, char **argv);
 void	ft_init_data(t_data *data);
+void	ft_launch_mlx(t_data *data);
 
 //Error handling and cleanup
-void	ft_error(char *message);
-void	ft_error_and_free(char *message, char **arr);
-void	ft_error_and_free_2(char *message, char **arr, char **rgb);
+void	ft_error(char *message, t_data *data);
+void	ft_error_and_free(char *msg, char **arr, t_data *data);
+void	ft_error_and_free_2(char *msg, char **arr, char **rgb, t_data *data);
 void	ft_free_array(char **arr);
 void	ft_free_array_2(char **arr, char **arr2);
 void	ft_free_array_3(char **arr, char **arr2, char **arr3);
 void	ft_clean_data(t_data *data);
+void	ft_free_all(t_data *data);
 
 //Parsing
 int		ft_parse_scene(char *file, t_data *data);
@@ -162,5 +164,6 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 //Hooks
 int		ft_key_handle(int keysym, t_data *data);
+int		ft_mouse_quit(t_data *data);
 
 #endif
