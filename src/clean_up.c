@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:46:59 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/22 19:32:22 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:56:49 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,3 @@ void	ft_free_array(char **arr)
 	free(arr);
 }
 
-// Free two 2D arrays
-void	ft_free_array_2(char **arr, char **arr2)
-{
-	ft_free_array(arr);
-	ft_free_array(arr2);
-}
-
-// Free three 2D arrays
-void	ft_free_array_3(char **arr, char **arr2, char **arr3)
-{
-	ft_free_array(arr);
-	ft_free_array(arr2);
-	ft_free_array(arr3);
-}

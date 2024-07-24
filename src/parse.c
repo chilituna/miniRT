@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/22 19:26:07 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:32:16 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	ft_parsing(int fd, char *line, t_data *data)
 			continue ;
 		}
 		else
-			ft_error("Invalid identifier\n", data);
+			ft_parsing_error("Invalid identifier\n", data, line);
 		free(line);
+		line = NULL;
 	}
 }
