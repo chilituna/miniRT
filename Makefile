@@ -6,7 +6,7 @@
 #    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/07/22 19:44:24 by aarponen         ###   ########.fr        #
+#    Updated: 2024/07/24 19:25:05 by aarponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT_FLAGS = -L$(LIBFT_PATH) -lft
 # Source and object files
 SRC = src/main.c src/init.c src/parse.c src/launch.c \
 	src/clean_up.c src/error_handling.c \
-	src/parse_ambient.c src/parse_camera.c src/parse_light.c \
+	src/parse_ambient.c src/parse_camera.c src/parse_camera_2.c src/parse_light.c \
 	src/utils.c src/hooks.c
 OBJ = $(SRC:.c=.o)
 

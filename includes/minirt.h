@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/22 19:45:00 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:24:23 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,11 +143,8 @@ void	ft_launch_mlx(t_data *data);
 
 //Error handling and cleanup
 void	ft_error(char *message, t_data *data);
-void	ft_error_and_free(char *msg, char **arr, t_data *data);
-void	ft_error_and_free_2(char *msg, char **arr, char **rgb, t_data *data);
+void	ft_parsing_error(char *str, t_data *data, char *line);
 void	ft_free_array(char **arr);
-void	ft_free_array_2(char **arr, char **arr2);
-void	ft_free_array_3(char **arr, char **arr2, char **arr3);
 void	ft_clean_data(t_data *data);
 void	ft_free_all(t_data *data);
 
@@ -156,6 +153,7 @@ int		ft_parse_scene(char *file, t_data *data);
 void	ft_parsing(int fd, char *line, t_data *data);
 void	ft_parse_ambient(char *line, t_data *data);
 void	ft_parse_camera(char *line, t_data *data);
+void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec);
 void	ft_parse_light(char *line, t_data *data);
 
 //Utils
