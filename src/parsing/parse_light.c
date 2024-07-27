@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:46:50 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 10:30:15 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:17:20 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	ft_set_light(t_light *light, char **arr, char **pos)
 	light->origin_y = ft_atof(pos[1]);
 	light->origin_z = ft_atof(pos[2]);
 	light->ratio = ft_atof(arr[2]);
-	printf("--LIGHT--\n");
-	printf("Position: %f, %f, %f\n", light->origin_x,
+	printf("LIGHT\n");
+	printf("- Position: %f, %f, %f\n", light->origin_x,
 		light->origin_y, light->origin_z);
-	printf("Ratio: %f\n", light->ratio);
+	printf("- Ratio: %f\n", light->ratio);
 }
 
 // Initialize the light struct

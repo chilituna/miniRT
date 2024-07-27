@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:24:20 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 12:29:20 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:16:41 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec)
 	camera->vector_y = ft_atof(vec[1]);
 	camera->vector_z = ft_atof(vec[2]);
 	camera->fov = ft_atof(arr[3]);
-	printf("--CAMERA--\n");
-	printf("Position: %f, %f, %f\n", camera->origin_x,
+	printf("CAMERA\n");
+	printf("- Position: %f, %f, %f\n", camera->origin_x,
 		camera->origin_y, camera->origin_z);
-	printf("Vector: %f, %f, %f\n", camera->vector_x,
+	printf("- Vector: %f, %f, %f\n", camera->vector_x,
 		camera->vector_y, camera->vector_z);
-	printf("FOV: %f\n", camera->fov);
+	printf("- FOV: %f\n", camera->fov);
 }
 
 int	ft_check_fov(char **arr, char **pos, char **vec)

@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:50:56 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 11:45:17 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:17:36 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	ft_set_plane(t_plane *plane, char **pos, char **vec, char **rgb)
 	plane->color_r = ft_atoi(rgb[0]);
 	plane->color_g = ft_atoi(rgb[1]);
 	plane->color_b = ft_atoi(rgb[2]);
-	printf("--PLANE--\n");
-	printf("Position: %f, %f, %f\n", plane->origin_x,
+	printf("PLANE\n");
+	printf("- Position: %f, %f, %f\n", plane->origin_x,
 		plane->origin_y, plane->origin_z);
-	printf("Vector: %f, %f, %f\n", plane->vector_x,
+	printf("- Vector: %f, %f, %f\n", plane->vector_x,
 		plane->vector_y, plane->vector_z);
-	printf("Color: %d, %d, %d\n", plane->color_r, plane->color_g,
+	printf("- Color: %d, %d, %d\n", plane->color_r, plane->color_g,
 		plane->color_b);
 	ft_free_array(pos);
 	ft_free_array(vec);

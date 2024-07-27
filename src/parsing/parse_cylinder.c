@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:40:44 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 12:30:09 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:17:07 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void	ft_set_cylinder_2(t_cylinder *cylinder, char **arr)
 	cylinder->diameter = ft_atof(arr[3]);
 	cylinder->height = ft_atof(arr[4]);
 	ft_free_array(arr);
-	printf("--CYLINDER--\n");
-	printf("Position: %f, %f, %f\n", cylinder->origin_x,
+	printf("CYLINDER\n");
+	printf("- Position: %f, %f, %f\n", cylinder->origin_x,
 		cylinder->origin_y, cylinder->origin_z);
-	printf("Vector: %f, %f, %f\n", cylinder->vector_x,
+	printf("- Vector: %f, %f, %f\n", cylinder->vector_x,
 		cylinder->vector_y, cylinder->vector_z);
-	printf("Diameter: %f\n", cylinder->diameter);
-	printf("Height: %f\n", cylinder->height);
-	printf("Color: %d, %d, %d\n", cylinder->color_r, cylinder->color_g,
+	printf("- Diameter: %f\n", cylinder->diameter);
+	printf("- Height: %f\n", cylinder->height);
+	printf("- Color: %d, %d, %d\n", cylinder->color_r, cylinder->color_g,
 		cylinder->color_b);
 }
 
