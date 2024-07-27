@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:24:20 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/24 19:50:55 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:29:20 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,42 @@ void	ft_init_camera(t_data *data, char *line)
 	data->camera = camera;
 }
 
-void	ft_check_vectors(char **arr, char **vec, t_data *data)
+// Set the camera struct
+void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec)
 {
-	if (ft_atof(vec[0]) < -1 || ft_atof(vec[0]) > 1 || ft_atof(vec[1]) < -1
-		|| ft_atof(vec[1]) > 1 || ft_atof(vec[2]) < -1 || ft_atof(vec[2]) > 1)
-	{
-		ft_free_array(arr);
-		ft_free_array(vec);
-		ft_parsing_error("Invalid camera vector\n", data, arr[0]);
-	}
+	camera->origin_x = ft_atof(pos[0]);
+	camera->origin_y = ft_atof(pos[1]);
+	camera->origin_z = ft_atof(pos[2]);
+	camera->vector_x = ft_atof(vec[0]);
+	camera->vector_y = ft_atof(vec[1]);
+	camera->vector_z = ft_atof(vec[2]);
+	camera->fov = ft_atof(arr[3]);
+	printf("--CAMERA--\n");
+	printf("Position: %f, %f, %f\n", camera->origin_x,
+		camera->origin_y, camera->origin_z);
+	printf("Vector: %f, %f, %f\n", camera->vector_x,
+		camera->vector_y, camera->vector_z);
+	printf("FOV: %f\n", camera->fov);
 }
 
-void	ft_check_pos(char **pos, char **arr, t_data *data)
-{
-	if (pos[0] == NULL || pos[1] == NULL || pos[2] == NULL || pos[3] != NULL)
-	{
-		ft_free_array(arr);
-		ft_free_array(pos);
-		ft_parsing_error("Invalid camera position\n", data, arr[0]);
-	}
-}
-
-
-void	ft_check_fov(char **arr, char **pos, char **vec, t_data *data, char *l)
+int	ft_check_fov(char **arr, char **pos, char **vec)
 {
 	if (ft_atof(arr[3]) < 0 || ft_atof(arr[3]) > 180)
 	{
-		ft_free_array(arr);
 		ft_free_array(pos);
 		ft_free_array(vec);
-		ft_parsing_error("Invalid camera fov\n", data, l);
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_check_camera_input(char **arr, t_data *data, char *line)
+{
+	if (arr[0][1] || arr[1] == NULL || arr[2] == NULL || arr[3] == NULL
+		|| arr[4] != NULL)
+	{
+		ft_free_array(arr);
+		ft_parsing_error("Invalid camera input\n", data, line);
 	}
 }
 
@@ -68,22 +74,18 @@ void	ft_parse_camera(char *line, t_data *data)
 	ft_init_camera(data, line);
 	ft_normalize_whitespace(line);
 	arr = ft_split(line, ' ');
-	if (arr[0][1] || arr[1] == NULL || arr[2] == NULL || arr[3] == NULL
-		|| arr[4] != NULL)
-	{
-		ft_free_array(arr);
-		ft_parsing_error("Invalid camera\n", data, line);
-	}
-	while (ft_isspace(*arr[1]))
-		arr[1]++;
+	ft_check_camera_input(arr, data, line);
+	ft_remove_whitespace(arr);
 	pos = ft_split(arr[1], ',');
-	ft_check_pos(pos, arr, data);
-	while (ft_isspace(*arr[2]))
-		arr[2]++;
+	if (ft_check_pos(pos, arr))
+		ft_parsing_error("Invalid camera position\n", data, line);
 	vec = ft_split(arr[2], ',');
-	ft_check_vectors(arr, vec, data);
-	while (ft_isspace(*arr[3]))
-		arr[3]++;
-	ft_check_fov(arr, pos, vec, data, line);
+	if (ft_check_vectors(arr, pos, vec))
+		ft_parsing_error("Invalid camera vector\n", data, line);
+	if (ft_check_fov(arr, pos, vec))
+		ft_parsing_error("Invalid camera fov\n", data, line);
 	ft_set_camera(data->camera, arr, pos, vec);
+	ft_free_array(arr);
+	ft_free_array(pos);
+	ft_free_array(vec);
 }
