@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:46:50 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/24 19:52:41 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 10:30:15 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_set_light(t_light *light, char **arr, char **pos)
 	light->origin_y = ft_atof(pos[1]);
 	light->origin_z = ft_atof(pos[2]);
 	light->ratio = ft_atof(arr[2]);
-	printf("Light set:\n");
+	printf("--LIGHT--\n");
 	printf("Position: %f, %f, %f\n", light->origin_x,
 		light->origin_y, light->origin_z);
 	printf("Ratio: %f\n", light->ratio);
@@ -46,13 +46,12 @@ void	ft_check_light_ratio(char **arr, char **pos, t_data *data, char *line)
 	}
 }
 
-void	ft_check_light_pos(char **pos, char **arr, t_data *data, char *line)
+void	ft_check_light_input(char **arr, t_data *data, char *line)
 {
-	if (pos[0] == NULL || pos[1] == NULL || pos[2] == NULL || pos[3] != NULL)
+	if (arr[0][1] || arr[1] == NULL || arr[2] == NULL || arr[3] != NULL)
 	{
 		ft_free_array(arr);
-		ft_free_array(pos);
-		ft_parsing_error("Invalid light position\n", data, line);
+		ft_parsing_error("Invalid light input\n", data, line);
 	}
 }
 
@@ -67,17 +66,11 @@ void	ft_parse_light(char *line, t_data *data)
 	ft_init_light(data, line);
 	ft_normalize_whitespace(line);
 	arr = ft_split(line, ' ');
-	if (arr[0][1] || arr[1] == NULL || arr[2] == NULL || arr[3] != NULL)
-	{
-		ft_free_array(arr);
-		ft_parsing_error("Invalid light\n", data, line);
-	}
-	while (ft_isspace(*arr[1]))
-		arr[1]++;
+	ft_check_light_input(arr, data, line);
+	ft_remove_whitespace(arr);
 	pos = ft_split(arr[1], ',');
-	ft_check_light_pos(pos, arr, data, line);
-	while (ft_isspace(*arr[2]))
-		arr[2]++;
+	if (ft_check_pos(pos, arr))
+		ft_parsing_error("Invalid light position\n", data, line);
 	ft_check_light_ratio(arr, pos, data, line);
 	ft_set_light(data->light, arr, pos);
 	ft_free_array(arr);

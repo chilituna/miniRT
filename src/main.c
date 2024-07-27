@@ -6,13 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:38:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/22 19:43:49 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:26:32 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-
 
 int	main(int argc, char **argv)
 {

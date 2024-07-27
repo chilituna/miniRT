@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/24 19:24:23 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:37:54 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,11 +153,22 @@ int		ft_parse_scene(char *file, t_data *data);
 void	ft_parsing(int fd, char *line, t_data *data);
 void	ft_parse_ambient(char *line, t_data *data);
 void	ft_parse_camera(char *line, t_data *data);
-void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec);
 void	ft_parse_light(char *line, t_data *data);
+void	ft_parse_sphere(char *line, t_data *data);
+void	ft_parse_plane(char *line, t_data *data);
+void	ft_parse_cylinder(char *line, t_data *data);
+
+//Parsing Utils
+int		ft_check_pos(char **pos, char **arr);
+int		ft_check_vectors(char **arr, char **pos, char **vec);
+int		ft_check_rgb(char **arr, char **rgb);
+int		ft_check_rgb_2(char **arr, char **pos, char **vec, char **rgb);
+void	ft_check_size(char **arr, int i, t_data *data, char *l);
+
 
 //Utils
 void	ft_normalize_whitespace(char *line);
+void	ft_remove_whitespace(char **arr);
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 //Hooks
