@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:37:36 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 10:15:32 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:28:27 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,4 @@ void	ft_remove_whitespace(char **arr)
 			arr[i]++;
 		i++;
 	}
-}
-
-// put a pixel to the image
-void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
 }

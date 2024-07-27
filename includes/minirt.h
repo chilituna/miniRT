@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 11:37:54 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:39:25 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void	ft_launch_mlx(t_data *data);
 void	ft_error(char *message, t_data *data);
 void	ft_parsing_error(char *str, t_data *data, char *line);
 void	ft_free_array(char **arr);
-void	ft_clean_data(t_data *data);
 void	ft_free_all(t_data *data);
 
 //Parsing
@@ -165,11 +164,19 @@ int		ft_check_rgb(char **arr, char **rgb);
 int		ft_check_rgb_2(char **arr, char **pos, char **vec, char **rgb);
 void	ft_check_size(char **arr, int i, t_data *data, char *l);
 
+// Drawing
+void	ft_draw_scene(t_data *data);
+void	ft_draw_sphere(t_data *data);
+
+// Drawing utils
+void	ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+int		ft_calculate_color(int x, int y);
+int		ft_create_trgb(int t, double r, double g, double b);
+int		ft_trgb(int t, int red, int green, int blue);
 
 //Utils
 void	ft_normalize_whitespace(char *line);
 void	ft_remove_whitespace(char **arr);
-void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 //Hooks
 int		ft_key_handle(int keysym, t_data *data);
