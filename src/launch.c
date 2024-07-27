@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:44:02 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/24 20:01:31 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/27 13:09:03 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_create_image(t_data *data)
 			&data->mlx->line_length, &data->mlx->endian);
 	if (!data->mlx->addr)
 		ft_error("mlx_get_data_addr failed\n", data);
+	ft_draw_scene(data);
 }
 
 void	ft_launch_mlx(t_data *data)
