@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:04:39 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 12:26:47 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:29:29 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,5 @@ void	ft_parsing_error(char *str, t_data *data, char *line)
 	line = NULL;
 	ft_error(str, data);
 }
+
+

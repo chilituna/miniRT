@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:24:20 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 18:16:41 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:40:09 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,40 @@
 void	ft_init_camera(t_data *data, char *line)
 {
 	t_camera	*camera;
+	t_vector	*origin;
+	t_vector	*direction;
 
 	if (data->camera)
 		ft_parsing_error("Duplicate camera\n", data, line);
 	camera = (t_camera *)malloc(sizeof(t_camera));
 	if (!camera)
 		ft_parsing_error("Failed to allocate memory for camera\n", data, line);
+	origin = (t_vector *)malloc(sizeof(t_vector));
+	if (!origin)
+		ft_parsing_error("Failed to malloc camera origin\n", data, line);
+	direction = (t_vector *)malloc(sizeof(t_vector));
+	if (!direction)
+		ft_parsing_error("Failed to malloc camera direction\n", data, line);
+	camera->origin = origin;
+	camera->direction = direction;
 	data->camera = camera;
 }
 
 // Set the camera struct
 void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec)
 {
-	camera->origin_x = ft_atof(pos[0]);
-	camera->origin_y = ft_atof(pos[1]);
-	camera->origin_z = ft_atof(pos[2]);
-	camera->vector_x = ft_atof(vec[0]);
-	camera->vector_y = ft_atof(vec[1]);
-	camera->vector_z = ft_atof(vec[2]);
+	camera->origin->x = ft_atof(pos[0]);
+	camera->origin->y = ft_atof(pos[1]);
+	camera->origin->z = ft_atof(pos[2]);
+	camera->direction->x = ft_atof(vec[0]);
+	camera->direction->y = ft_atof(vec[1]);
+	camera->direction->z = ft_atof(vec[2]);
 	camera->fov = ft_atof(arr[3]);
 	printf("CAMERA\n");
-	printf("- Position: %f, %f, %f\n", camera->origin_x,
-		camera->origin_y, camera->origin_z);
-	printf("- Vector: %f, %f, %f\n", camera->vector_x,
-		camera->vector_y, camera->vector_z);
+	printf("- Position: %f, %f, %f\n", camera->origin->x,
+		camera->origin->y, camera->origin->z);
+	printf("- Vector: %f, %f, %f\n", camera->direction->x,
+		camera->direction->y, camera->direction->z);
 	printf("- FOV: %f\n", camera->fov);
 }
 

@@ -6,11 +6,36 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:46:59 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 12:27:11 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:50:48 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+// Clean light and camera
+void	ft_clean_scene(t_data *data)
+{
+	if (data->ambient)
+	{
+		if (data->ambient->color)
+			free(data->ambient->color);
+		free(data->ambient);
+	}
+	if (data->camera)
+	{
+		if (data->camera->origin)
+			free(data->camera->origin);
+		if (data->camera->direction)
+			free(data->camera->direction);
+		free(data->camera);
+	}
+	if (data->light)
+	{
+		if (data->light->origin)
+			free(data->light->origin);
+		free(data->light);
+	}
+}
 
 // Clean sphere linked list
 void	ft_clean_sphere(t_data *data)
@@ -22,6 +47,8 @@ void	ft_clean_sphere(t_data *data)
 	while (sphere)
 	{
 		tmp = sphere->next;
+		free(sphere->color);
+		free(sphere->origin);
 		free(sphere);
 		sphere = tmp;
 	}
@@ -37,6 +64,9 @@ void	ft_clean_plane(t_data *data)
 	while (plane)
 	{
 		tmp = plane->next;
+		free(plane->color);
+		free(plane->origin);
+		free(plane->orientation);
 		free(plane);
 		plane = tmp;
 	}
@@ -52,6 +82,9 @@ void	ft_clean_cylinder(t_data *data)
 	while (cylinder)
 	{
 		tmp = cylinder->next;
+		free(cylinder->color);
+		free(cylinder->origin);
+		free(cylinder->orientation);
 		free(cylinder);
 		cylinder = tmp;
 	}
@@ -60,12 +93,7 @@ void	ft_clean_cylinder(t_data *data)
 // Free all the allocated memory
 void	ft_free_all(t_data *data)
 {
-	if (data->ambient)
-		free(data->ambient);
-	if (data->camera)
-		free(data->camera);
-	if (data->light)
-		free(data->light);
+	ft_clean_scene(data);
 	if (data->sphere)
 		ft_clean_sphere(data);
 	if (data->plane)
@@ -83,16 +111,3 @@ void	ft_free_all(t_data *data)
 	free(data);
 }
 
-// Free a 2D array
-void	ft_free_array(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}

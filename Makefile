@@ -6,7 +6,7 @@
 #    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/07/27 17:30:11 by aarponen         ###   ########.fr        #
+#    Updated: 2024/07/28 15:38:19 by aarponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = src/main.c src/init.c src/launch.c \
 	src/clean_up.c src/error_handling.c \
 	src/parsing/parse.c  src/parsing/parse_ambient.c src/parsing/parse_camera.c \
 	src/parsing/parse_light.c src/parsing/parse_sphere.c src/parsing/parse_plane.c \
-	src/parsing/parse_cylinder.c src/parsing/parse_utils.c \
+	src/parsing/parse_cylinder.c src/parsing/parse_cylinder_2.c src/parsing/parse_utils.c \
 	src/draw/draw.c src/draw/draw_sphere.c \
 	src/draw/draw_utils.c \
 	src/utils.c src/hooks.c

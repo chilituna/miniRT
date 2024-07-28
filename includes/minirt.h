@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 17:39:25 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:36:36 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,22 @@
 #  define HEIGHT 600
 # endif
 
+// 3D vector
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+}			t_vector;
+
+// R,G,B colors in range [0-255]
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}		t_color;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -44,9 +60,7 @@ typedef struct s_mlx
 typedef struct s_ambient
 {
 	float	ratio;
-	int		color_r;
-	int		color_g;
-	int		color_b;
+	t_color	*color;
 }			t_ambient;
 
 // camera position
@@ -54,37 +68,27 @@ typedef struct s_ambient
 // horizontal field of view in degrees in range [0,180]
 typedef struct s_camera
 {
-	float	origin_x;
-	float	origin_y;
-	float	origin_z;
-	float	vector_x;
-	float	vector_y;
-	float	vector_z;
-	float	fov;
-}			t_camera;
+	t_vector	*origin;
+	t_vector	*direction;
+	float		fov;
+}				t_camera;
 
 // light position
 // light brightness in range [0.0,1.0]
 typedef struct s_light
 {
-	float	origin_x;
-	float	origin_y;
-	float	origin_z;
-	float	ratio;
-}			t_light;
+	t_vector	*origin;
+	float		ratio;
+}				t_light;
 
 // sphere position
 // sphere diameter
 // R,G,B colors in range [0-255]
 typedef struct s_sphere
 {
-	float			origin_x;
-	float			origin_y;
-	float			origin_z;
+	t_vector		*origin;
 	float			diameter;
-	int				color_r;
-	int				color_g;
-	int				color_b;
+	t_color			*color;
 	struct s_sphere	*next;
 }			t_sphere;
 
@@ -93,15 +97,9 @@ typedef struct s_sphere
 // R,G,B colors in range [0-255]
 typedef struct s_plane
 {
-	float			origin_x;
-	float			origin_y;
-	float			origin_z;
-	float			vector_x;
-	float			vector_y;
-	float			vector_z;
-	int				color_r;
-	int				color_g;
-	int				color_b;
+	t_vector		*origin;
+	t_vector		*orientation;
+	t_color			*color;
 	struct s_plane	*next;
 }			t_plane;
 
@@ -111,17 +109,11 @@ typedef struct s_plane
 // R,G,B colors in range [0-255]
 typedef struct s_cylinder
 {
-	float				origin_x;
-	float				origin_y;
-	float				origin_z;
-	float				vector_x;
-	float				vector_y;
-	float				vector_z;
+	t_vector			*origin;
+	t_vector			*orientation;
 	float				diameter;
 	float				height;
-	int					color_r;
-	int					color_g;
-	int					color_b;
+	t_color				*color;
 	struct s_cylinder	*next;
 }					t_cylinder;
 
@@ -156,6 +148,9 @@ void	ft_parse_light(char *line, t_data *data);
 void	ft_parse_sphere(char *line, t_data *data);
 void	ft_parse_plane(char *line, t_data *data);
 void	ft_parse_cylinder(char *line, t_data *data);
+void	ft_set_cylinder(t_cylinder *cyl, char **pos, char **vec, char **rgb);
+void	ft_set_cylinder_2(t_cylinder *cylinder, char **arr);
+
 
 //Parsing Utils
 int		ft_check_pos(char **pos, char **arr);

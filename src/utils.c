@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:37:36 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 17:28:27 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:29:33 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ void	ft_remove_whitespace(char **arr)
 			arr[i]++;
 		i++;
 	}
+}
+
+// Free a 2D array
+void	ft_free_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
