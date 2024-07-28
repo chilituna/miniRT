@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:36:36 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:24:41 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
+# include <math.h>
 # include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 
@@ -150,7 +151,6 @@ void	ft_parse_plane(char *line, t_data *data);
 void	ft_parse_cylinder(char *line, t_data *data);
 void	ft_set_cylinder(t_cylinder *cyl, char **pos, char **vec, char **rgb);
 void	ft_set_cylinder_2(t_cylinder *cylinder, char **arr);
-
 
 //Parsing Utils
 int		ft_check_pos(char **pos, char **arr);

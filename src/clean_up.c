@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:46:59 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:50:48 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:23:23 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,3 @@ void	ft_free_all(t_data *data)
 	free(data->mlx);
 	free(data);
 }
-

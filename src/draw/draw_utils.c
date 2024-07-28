@@ -6,12 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:28:31 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 17:39:10 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:22:37 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
 
 // put a pixel to the image
 void	ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
@@ -28,7 +27,6 @@ int	ft_trgb(int t, int red, int green, int blue)
 	return (t << 24 | red << 16 | green << 8 | blue);
 }
 
-
 // Create a trgb color for gradient
 int	ft_create_trgb(int t, double r, double g, double b)
 {
@@ -39,7 +37,6 @@ int	ft_create_trgb(int t, double r, double g, double b)
 	red = (int)(255.999 * r);
 	green = (int)(255.999 * g);
 	blue = (int)(255.999 * b);
-
 	return (t << 24 | red << 16 | green << 8 | blue);
 }
 
@@ -53,7 +50,5 @@ int	ft_calculate_color(int x, int y)
 	r = (double)x / (WIDTH - 1);
 	g = (double)y / (HEIGHT - 1);
 	b = 0.0;
-
 	return (ft_create_trgb(0, r, g, b));
 }
-

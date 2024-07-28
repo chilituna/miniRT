@@ -6,12 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 12:08:00 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:21:06 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
 
 // Draw the scene
 // Using doubles for color calculations and then converting them to integers

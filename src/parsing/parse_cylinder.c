@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:40:44 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:41:35 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:22:06 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	ft_init_cylinder(t_data *data, char *l)
 	new_cylinder->color = color;
 	ft_init_cylinder_2(data, new_cylinder);
 }
-
-
 
 void	ft_check_cylinder_input(char **arr, t_data *data, char *line)
 {

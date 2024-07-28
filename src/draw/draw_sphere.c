@@ -6,15 +6,20 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:46:07 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:48:18 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
+// Function to compute the dot product of two vectors
+float	ft_dot_product(t_vector *a, t_vector *b)
+{
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
+}
 
 // draw sphere
-// (bx^2 + by^2)t^2 + 2(axbx + ayby)t + (ax^2 + ay^2 - r^2) = 0
+// (bx^2 + by^2 + bz^2)t^2 + 2(axbx + ayby azbz)t + (ax^2 + ay^2 + az^2 - r^2) = 0
 // where
 // a = ray origin = camera position
 // b = ray direction = camera direction
@@ -22,6 +27,12 @@
 // t = hit distance
 void	ft_draw_sphere(t_data *data)
 {
+	// float		a;
+	// float		b = 2.0f * dot(data->camera->origin, data->camera->direction);
+	// float
+
+	// a = ft_dot_product(data->camera->direction, data->camera->direction);
+
 
 
 	t_sphere	*sphere;
