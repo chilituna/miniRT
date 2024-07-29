@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 18:24:41 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:21:53 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef struct s_color
 	int	b;
 }		t_color;
 
+// Ray from camera
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+}			t_ray;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -72,6 +79,9 @@ typedef struct s_camera
 	t_vector	*origin;
 	t_vector	*direction;
 	float		fov;
+	t_vector	pixel00_location;
+	t_vector	pixel_delta_x;
+	t_vector	pixel_delta_y;
 }				t_camera;
 
 // light position
@@ -130,51 +140,58 @@ typedef struct s_data
 }			t_data;
 
 //Start program
-int		main(int argc, char **argv);
-void	ft_init_data(t_data *data);
-void	ft_launch_mlx(t_data *data);
+int			main(int argc, char **argv);
+void		ft_init_data(t_data *data);
+void		ft_launch_mlx(t_data *data);
 
 //Error handling and cleanup
-void	ft_error(char *message, t_data *data);
-void	ft_parsing_error(char *str, t_data *data, char *line);
-void	ft_free_array(char **arr);
-void	ft_free_all(t_data *data);
+void		ft_error(char *message, t_data *data);
+void		ft_parsing_error(char *str, t_data *data, char *line);
+void		ft_free_array(char **arr);
+void		ft_free_all(t_data *data);
 
 //Parsing
-int		ft_parse_scene(char *file, t_data *data);
-void	ft_parsing(int fd, char *line, t_data *data);
-void	ft_parse_ambient(char *line, t_data *data);
-void	ft_parse_camera(char *line, t_data *data);
-void	ft_parse_light(char *line, t_data *data);
-void	ft_parse_sphere(char *line, t_data *data);
-void	ft_parse_plane(char *line, t_data *data);
-void	ft_parse_cylinder(char *line, t_data *data);
-void	ft_set_cylinder(t_cylinder *cyl, char **pos, char **vec, char **rgb);
-void	ft_set_cylinder_2(t_cylinder *cylinder, char **arr);
+int			ft_parse_scene(char *file, t_data *data);
+void		ft_parsing(int fd, char *line, t_data *data);
+void		ft_parse_ambient(char *line, t_data *data);
+void		ft_parse_camera(char *line, t_data *data);
+void		ft_parse_light(char *line, t_data *data);
+void		ft_parse_sphere(char *line, t_data *data);
+void		ft_parse_plane(char *line, t_data *data);
+void		ft_parse_cylinder(char *line, t_data *data);
+void		ft_set_cylinder(t_cylinder *cyl, char **pos, char **vec, char **rgb);
+void		ft_set_cylinder_2(t_cylinder *cylinder, char **arr);
 
 //Parsing Utils
-int		ft_check_pos(char **pos, char **arr);
-int		ft_check_vectors(char **arr, char **pos, char **vec);
-int		ft_check_rgb(char **arr, char **rgb);
-int		ft_check_rgb_2(char **arr, char **pos, char **vec, char **rgb);
-void	ft_check_size(char **arr, int i, t_data *data, char *l);
+int			ft_check_pos(char **pos, char **arr);
+int			ft_check_vectors(char **arr, char **pos, char **vec);
+int			ft_check_rgb(char **arr, char **rgb);
+int			ft_check_rgb_2(char **arr, char **pos, char **vec, char **rgb);
+void		ft_check_size(char **arr, int i, t_data *data, char *l);
 
 // Drawing
-void	ft_draw_scene(t_data *data);
-void	ft_draw_sphere(t_data *data);
+void		ft_draw_scene(t_data *data);
+float		ft_hit_sphere(t_data *data, int x, int y);
 
 // Drawing utils
-void	ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
-int		ft_calculate_color(int x, int y);
-int		ft_create_trgb(int t, double r, double g, double b);
-int		ft_trgb(int t, int red, int green, int blue);
+void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+int			ft_calculate_gradient(int x, int y);
+int			ft_create_trgb(int t, double r, double g, double b);
+int			ft_trgb(int t, t_color *color);
+
+// Utils vector math
+t_vector	ft_add(t_vector *v1, t_vector *v2);
+t_vector	ft_subtract(t_vector *v1, t_vector *v2);
+t_vector	ft_scale(t_vector *v, float scale);
+t_vector	ft_normalize(t_vector *v);
+float		ft_dot(t_vector *v1, t_vector *v2);
 
 //Utils
-void	ft_normalize_whitespace(char *line);
-void	ft_remove_whitespace(char **arr);
+void		ft_normalize_whitespace(char *line);
+void		ft_remove_whitespace(char **arr);
 
 //Hooks
-int		ft_key_handle(int keysym, t_data *data);
-int		ft_mouse_quit(t_data *data);
+int			ft_key_handle(int keysym, t_data *data);
+int			ft_mouse_quit(t_data *data);
 
 #endif

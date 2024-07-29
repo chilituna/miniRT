@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:28:31 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 18:22:37 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:44:07 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 }
 
 //bitshifts to create a trgb color
-int	ft_trgb(int t, int red, int green, int blue)
+int	ft_trgb(int t, t_color *color)
 {
-	return (t << 24 | red << 16 | green << 8 | blue);
+	return (t << 24 | color->r << 16 | color->g << 8 | color->b);
 }
 
 // Create a trgb color for gradient
@@ -41,7 +41,10 @@ int	ft_create_trgb(int t, double r, double g, double b)
 }
 
 // Creating a color gradient
-int	ft_calculate_color(int x, int y)
+// Using doubles for color calculations and then converting them to integers
+// ensures that the gradient is calculated with higher precision and smoothness.
+// 
+int	ft_calculate_gradient(int x, int y)
 {
 	double	r;
 	double	g;

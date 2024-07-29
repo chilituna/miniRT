@@ -6,7 +6,7 @@
 #    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/07/28 15:38:19 by aarponen         ###   ########.fr        #
+#    Updated: 2024/07/29 13:20:35 by aarponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC = src/main.c src/init.c src/launch.c \
 	src/parsing/parse_light.c src/parsing/parse_sphere.c src/parsing/parse_plane.c \
 	src/parsing/parse_cylinder.c src/parsing/parse_cylinder_2.c src/parsing/parse_utils.c \
 	src/draw/draw.c src/draw/draw_sphere.c \
-	src/draw/draw_utils.c \
+	src/draw/draw_utils.c src/draw/utils_vector_math.c \
 	src/utils.c src/hooks.c
 OBJ = $(SRC:.c=.o)
 
@@ -56,7 +56,7 @@ libft:
 
 # Rule to link object files into executable
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX_FLAGS) $(LIBFT_FLAGS) -o $(NAME)
+	$(CC) $(OBJ) $(MLX_FLAGS) $(LIBFT_FLAGS) -lm -o $(NAME)
 
 # Rule to clean up object files
 clean:
