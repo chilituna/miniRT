@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:10:46 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:39:00 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:50:52 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	ft_set_amblight(t_ambient *ambient, char **arr, char **rgb)
 	ambient->color->r = ft_atoi(rgb[0]);
 	ambient->color->g = ft_atoi(rgb[1]);
 	ambient->color->b = ft_atoi(rgb[2]);
-	printf("AMBIENT\n");
-	printf("- Ratio: %f\n", ambient->ratio);
-	printf("- Color: %d, %d, %d\n", ambient->color->r, ambient->color->g,
-		ambient->color->b);
 }
 
 void	ft_check_ambient_ratio(char **arr, t_data *data, char *line)

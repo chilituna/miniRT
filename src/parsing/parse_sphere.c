@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 08:52:00 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:44:15 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:51:30 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ void	ft_set_sphere(t_sphere *sphere, char **arr, char **pos, char **rgb)
 	sphere->color->r = ft_atoi(rgb[0]);
 	sphere->color->g = ft_atoi(rgb[1]);
 	sphere->color->b = ft_atoi(rgb[2]);
-	printf("SPHERE\n");
-	printf("- Position: %f, %f, %f\n", sphere->origin->x,
-		sphere->origin->y, sphere->origin->z);
-	printf("- Diameter: %f\n", sphere->diameter);
-	printf("- Color: %d, %d, %d\n", sphere->color->r, sphere->color->g,
-		sphere->color->b);
 }
 
 void	ft_check_sphere_input(char **arr, t_data *data, char *line)

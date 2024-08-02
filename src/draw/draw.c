@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 09:10:43 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:54:28 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_setup_camera(t_camera *camera)
 	float		viewport_width;
 	t_vector	viewport_x;
 	t_vector	viewport_y;
-
 
 	focal_length = 1.0f;
 	viewport_height = 2.0f;
@@ -40,7 +39,6 @@ void	ft_setup_camera(t_camera *camera)
 	camera->pixel00_location = ft_add(&upper_left_corner, &camera->pixel00_location);
 }
 
-
 t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 {
 	t_vector	pixel_center;
@@ -54,7 +52,6 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 	return (pixel_center);
 }
 
-
 // Draw the scene:
 // Iterate through the screen pixels and calculate the color for each pixel.
 // Check for all objects in the scene and calculate the closest object hit.
@@ -63,7 +60,7 @@ void	ft_draw_scene(t_data *data)
 {
 	int			x;
 	int			y;
-	t_hit 		hit_result;
+	t_hit		hit_result;
 	t_vector	pixel_center;
 	t_ray		ray;
 
