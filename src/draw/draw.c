@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 08:18:34 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 09:10:43 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_draw_scene(t_data *data)
 {
 	int			x;
 	int			y;
-	float		distance;
+	t_hit 		hit_result;
 	t_vector	pixel_center;
 	t_ray		ray;
 
@@ -79,11 +79,11 @@ void	ft_draw_scene(t_data *data)
 			pixel_center = ft_calculate_pixel_center(data->camera, x, y);
 			ray.direction = ft_subtract(&pixel_center, data->camera->origin);
 			ray.origin = *data->camera->origin;
-			distance = -1.0f;
+			hit_result.distance = INFINITY;
 			if (data->sphere)
-				distance = ft_hit_sphere(data, ray);
-			if (distance >= 0.0f)
-				ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, data->sphere->color));
+				hit_result = ft_hit_sphere(data, ray);
+			if (hit_result.distance < INFINITY)
+				ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, hit_result.sphere->color));
 			x++;
 		}
 		y++;
