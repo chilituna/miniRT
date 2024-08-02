@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 08:20:54 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 09:13:05 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,13 @@ typedef struct s_data
 	t_cylinder	*cylinder;
 }			t_data;
 
+// Hit distance and sphere
+typedef struct s_hit
+{
+	float		distance;
+	t_sphere	*sphere;
+}				t_hit;
+
 //Start program
 int			main(int argc, char **argv);
 void		ft_init_data(t_data *data);
@@ -171,7 +178,7 @@ void		ft_check_size(char **arr, int i, t_data *data, char *l);
 
 // Drawing
 void		ft_draw_scene(t_data *data);
-float		ft_hit_sphere(t_data *data, t_ray ray);
+t_hit		ft_hit_sphere(t_data *data, t_ray ray);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 08:21:34 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 09:34:33 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,49 @@ t_vector	ft_calc_ray_direction(t_data *data, int x, int y)
 // b = ray direction
 // r = radius = sphere radius
 // t = hit distance
-//
-float	ft_hit_sphere(t_data *data, t_ray ray)
+// oc = origin to center
+t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 {
 	t_vector	oc;
 	float		a;
 	float		b;
 	float		c;
 	float		discriminant;
+	float		t1;
+	float		t2;
+	float		closest_t;
+	t_sphere	*sphere;
+	t_sphere	*closest_sphere;
+	t_hit 		result;
 
-	oc = ft_subtract(&ray.origin, data->sphere->origin);
-	a = ft_dot(&ray.direction, &ray.direction);
-	b = 2.0 * ft_dot(&oc, &ray.direction);
-	c = ft_dot(&ray.origin, &ray.origin) - (data->sphere->diameter / 2)
-		* (data->sphere->diameter / 2);
-	discriminant = b * b - 4.0f * a * c;
-	if (discriminant < 0)
-		return (-1.0f);
-	else
-		return (1.0f);
+	closest_t = INFINITY;
+	closest_sphere = NULL;
+	sphere = data->sphere;
+	while (sphere)
+	{
+		oc = ft_subtract(&ray.origin, sphere->origin);
+		a = ft_dot(&ray.direction, &ray.direction);
+		b = 2.0 * ft_dot(&oc, &ray.direction);
+		c = ft_dot(&oc, &oc) - (sphere->diameter / 2.0f)
+			* (sphere->diameter / 2.0f);
+		discriminant = b * b - 4.0f * a * c;
+		if (discriminant >= 0)
+		{
+			t1 = (b - sqrt(discriminant)) / (2.0f * a);
+			t2 = (b + sqrt(discriminant)) / (2.0f * a);
+			if (t1 > 0 && t1 < closest_t)
+			{
+				closest_t = t1;
+				closest_sphere = sphere;
+			}
+			if (t2 > 0 && t2 < closest_t)
+			{
+				closest_t = t2;
+				closest_sphere = sphere;
+			}
+		}
+		sphere = sphere->next;
+	}
+	result = (t_hit){closest_t, closest_sphere};
+	return (result);
 }
