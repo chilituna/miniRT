@@ -6,13 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/29 13:04:04 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 08:21:34 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-
 
 // Function to calculate the ray direction
 // Normalized Device Coordinates (NDC) centers the rays in the middle of
@@ -48,23 +46,20 @@ t_vector	ft_calc_ray_direction(t_data *data, int x, int y)
 // r = radius = sphere radius
 // t = hit distance
 //
-float	ft_hit_sphere(t_data *data, int x, int y)
+float	ft_hit_sphere(t_data *data, t_ray ray)
 {
-	t_ray		ray;
-	t_vector	oc; // vector from ray origin to sphere center
+	t_vector	oc;
 	float		a;
 	float		b;
 	float		c;
 	float		discriminant;
 
-	ray.origin = *data->camera->origin;
-	ray.direction = ft_calc_ray_direction(data, x, y);
+	oc = ft_subtract(&ray.origin, data->sphere->origin);
 	a = ft_dot(&ray.direction, &ray.direction);
 	b = 2.0 * ft_dot(&oc, &ray.direction);
 	c = ft_dot(&ray.origin, &ray.origin) - (data->sphere->diameter / 2)
 		* (data->sphere->diameter / 2);
 	discriminant = b * b - 4.0f * a * c;
-
 	if (discriminant < 0)
 		return (-1.0f);
 	else

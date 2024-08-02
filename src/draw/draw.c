@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/29 14:20:01 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 08:18:34 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_draw_scene(t_data *data)
 			ray.origin = *data->camera->origin;
 			distance = -1.0f;
 			if (data->sphere)
-				distance = ft_hit_sphere(data, x, y);
+				distance = ft_hit_sphere(data, ray);
 			if (distance >= 0.0f)
 				ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, data->sphere->color));
 			x++;

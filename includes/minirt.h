@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/29 14:21:53 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 08:20:54 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void		ft_check_size(char **arr, int i, t_data *data, char *l);
 
 // Drawing
 void		ft_draw_scene(t_data *data);
-float		ft_hit_sphere(t_data *data, int x, int y);
+float		ft_hit_sphere(t_data *data, t_ray ray);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
