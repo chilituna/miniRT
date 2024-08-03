@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 14:08:01 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/03 10:34:09 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_data
 typedef struct s_hit
 {
 	float		distance;
+	t_vector	hitpoint;
 	t_sphere	*sphere;
 }				t_hit;
 
@@ -166,7 +167,8 @@ void		ft_parse_light(char *line, t_data *data);
 void		ft_parse_sphere(char *line, t_data *data);
 void		ft_parse_plane(char *line, t_data *data);
 void		ft_parse_cylinder(char *line, t_data *data);
-void		ft_set_cylinder(t_cylinder *cyl, char **pos, char **vec, char **rgb);
+void		ft_set_cylinder(t_cylinder *cyl, char **pos,
+				char **vec, char **rgb);
 void		ft_set_cylinder_2(t_cylinder *cylinder, char **arr);
 
 //Parsing Utils
@@ -179,6 +181,7 @@ void		ft_check_size(char **arr, int i, t_data *data, char *l);
 // Drawing
 void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
+void		ft_setup_camera(t_camera *camera);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
