@@ -6,12 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/03 11:56:47 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 00:02:13 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
 
 t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 {

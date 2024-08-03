@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/03 10:59:55 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/03 23:46:13 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ typedef struct s_camera
 	t_vector	*origin;
 	t_vector	*direction;
 	float		fov;
+	float		focal_length;
+	t_vector	up;
+	t_vector	right;
+	float		h;
+	float		w;
 	t_vector	pixel00_location;
 	t_vector	pixel_delta_x;
 	t_vector	pixel_delta_y;
