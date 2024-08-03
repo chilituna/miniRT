@@ -1,2 +1,7 @@
 #ignore the files in dir
 /.vscode
+
+# Ignore object files, libraries and miniRT executable
+*.o
+*.a
+minirt
