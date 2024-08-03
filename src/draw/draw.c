@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 00:02:13 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 13:17:49 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_draw_scene(t_data *data)
 	t_hit		hit_result;
 	t_vector	pixel_center;
 	t_ray		ray;
+	t_color		pixel_color;
 
 	y = 0;
 	x = 0;
@@ -60,7 +61,12 @@ void	ft_draw_scene(t_data *data)
 			if (data->sphere)
 				hit_result = ft_hit_sphere(data, ray);
 			if (hit_result.distance < INFINITY)
-				ft_put_color(data, x, y, hit_result);
+			{
+				pixel_color = calculate_lighting(hit_result, data);
+				ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, &pixel_color));
+			}
+			else
+				ft_my_mlx_pixel_put(data->mlx, x, y, 0);
 			x++;
 		}
 		y++;
