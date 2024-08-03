@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 09:34:33 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:54:22 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,42 @@ t_vector	ft_calc_ray_direction(t_data *data, int x, int y)
 	return (direction);
 }
 
+// Function to calculate the hit distance of the sphere
+float	ft_closest_hit_sphere(t_sphere *sphere, t_ray ray, float discriminant)
+{
+	float		t1;
+	float		t2;
+	t_vector	oc;
+	float		a;
+	float		b;
+
+	oc = ft_subtract(sphere->origin, &ray.origin);
+	a = ft_dot(&ray.direction, &ray.direction);
+	b = 2.0 * ft_dot(&ray.direction, &oc);
+	t1 = (-b - sqrt(discriminant)) / (2.0f * a);
+	t2 = (-b + sqrt(discriminant)) / (2.0f * a);
+	if (t1 > 0 && (t1 < t2))
+		return (t1);
+	if (t2 > 0)
+		return (t2);
+	return (INFINITY);
+}
+
+float	ft_discriminant(t_sphere *sphere, t_ray ray)
+{
+	t_vector	oc;
+	float		a;
+	float		b;
+	float		c;
+
+	oc = ft_subtract(sphere->origin, &ray.origin);
+	a = ft_dot(&ray.direction, &ray.direction);
+	b = 2.0 * ft_dot(&ray.direction, &oc);
+	c = ft_dot(&oc, &oc) - (sphere->diameter / 2.0f)
+		* (sphere->diameter / 2.0f);
+	return (b * b - 4.0f * a * c);
+}
+
 // draw sphere
 // (bx^2 + by^2 + bz^2)t^2 + 2(axbx + ayby azbz)t +
 // (ax^2 + ay^2 + az^2 - r^2) = 0
@@ -48,46 +84,29 @@ t_vector	ft_calc_ray_direction(t_data *data, int x, int y)
 // oc = origin to center
 t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 {
-	t_vector	oc;
-	float		a;
-	float		b;
-	float		c;
 	float		discriminant;
-	float		t1;
-	float		t2;
 	float		closest_t;
+	float		hit_distance;
 	t_sphere	*sphere;
-	t_sphere	*closest_sphere;
-	t_hit 		result;
+	t_hit		hit_result;
 
 	closest_t = INFINITY;
-	closest_sphere = NULL;
+	hit_result.sphere = NULL;
 	sphere = data->sphere;
 	while (sphere)
 	{
-		oc = ft_subtract(&ray.origin, sphere->origin);
-		a = ft_dot(&ray.direction, &ray.direction);
-		b = 2.0 * ft_dot(&oc, &ray.direction);
-		c = ft_dot(&oc, &oc) - (sphere->diameter / 2.0f)
-			* (sphere->diameter / 2.0f);
-		discriminant = b * b - 4.0f * a * c;
+		discriminant = ft_discriminant(sphere, ray);
 		if (discriminant >= 0)
 		{
-			t1 = (b - sqrt(discriminant)) / (2.0f * a);
-			t2 = (b + sqrt(discriminant)) / (2.0f * a);
-			if (t1 > 0 && t1 < closest_t)
+			hit_distance = ft_closest_hit_sphere(sphere, ray, discriminant);
+			if (hit_distance < closest_t)
 			{
-				closest_t = t1;
-				closest_sphere = sphere;
-			}
-			if (t2 > 0 && t2 < closest_t)
-			{
-				closest_t = t2;
-				closest_sphere = sphere;
+				closest_t = hit_distance;
+				hit_result.sphere = sphere;
 			}
 		}
 		sphere = sphere->next;
 	}
-	result = (t_hit){closest_t, closest_sphere};
-	return (result);
+	hit_result.distance = closest_t;
+	return (hit_result);
 }

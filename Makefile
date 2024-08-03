@@ -6,7 +6,7 @@
 #    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/07/29 13:20:35 by aarponen         ###   ########.fr        #
+#    Updated: 2024/08/03 10:32:45 by aarponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = src/main.c src/init.c src/launch.c \
 	src/parsing/parse_cylinder.c src/parsing/parse_cylinder_2.c src/parsing/parse_utils.c \
 	src/draw/draw.c src/draw/draw_sphere.c \
 	src/draw/draw_utils.c src/draw/utils_vector_math.c \
+	src/camera_setup.c \
 	src/utils.c src/hooks.c
 OBJ = $(SRC:.c=.o)
 

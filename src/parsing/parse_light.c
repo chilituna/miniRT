@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:46:50 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:56:18 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:51:15 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ void	ft_set_light(t_light *light, char **arr, char **pos)
 	light->origin->y = ft_atof(pos[1]);
 	light->origin->z = ft_atof(pos[2]);
 	light->ratio = ft_atof(arr[2]);
-	printf("LIGHT\n");
-	printf("- Position: %f, %f, %f\n", light->origin->x,
-		light->origin->y, light->origin->z);
-	printf("- Ratio: %f\n", light->ratio);
 }
 
 void	ft_check_light_ratio(char **arr, char **pos, t_data *data, char *line)

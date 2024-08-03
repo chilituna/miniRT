@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:12:55 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 15:41:21 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:51:03 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,4 @@ void	ft_set_cylinder_2(t_cylinder *cylinder, char **arr)
 	cylinder->diameter = ft_atof(arr[3]);
 	cylinder->height = ft_atof(arr[4]);
 	ft_free_array(arr);
-	printf("CYLINDER\n");
-	printf("- Position: %f, %f, %f\n", cylinder->origin->x,
-		cylinder->origin->y, cylinder->origin->z);
-	printf("- Vector: %f, %f, %f\n", cylinder->orientation->x,
-		cylinder->orientation->y, cylinder->orientation->z);
-	printf("- Diameter: %f\n", cylinder->diameter);
-	printf("- Height: %f\n", cylinder->height);
-	printf("- Color: %d, %d, %d\n", cylinder->color->r, cylinder->color->g,
-		cylinder->color->b);
 }
