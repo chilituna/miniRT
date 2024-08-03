@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/03 10:34:09 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/03 10:59:55 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_hit
 {
 	float		distance;
 	t_vector	hitpoint;
+	t_vector	normal;
 	t_sphere	*sphere;
 }				t_hit;
 

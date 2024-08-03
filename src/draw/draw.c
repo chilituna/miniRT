@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/03 10:32:10 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/03 11:13:48 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 	pixel_center = ft_add(&pixel_center, &camera->pixel00_location);
 	return (pixel_center);
 }
+
+// Calculate the color of the pixel based on co
 
 // Draw the scene:
 // Iterate through the screen pixels and calculate the color for each pixel.

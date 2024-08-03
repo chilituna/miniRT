@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 17:54:22 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/03 11:30:56 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,20 @@ float	ft_discriminant(t_sphere *sphere, t_ray ray)
 	return (b * b - 4.0f * a * c);
 }
 
+t_hit	ft_set_hit_result(t_hit hit_result, float t, t_sphere *sphere, t_ray ray)
+{
+	t_vector	scaled_direction;
+
+	scaled_direction = ft_scale(&ray.direction, t);
+	hit_result.sphere = sphere;
+	hit_result.distance = t;
+	hit_result.hitpoint = ft_add(&ray.origin, &scaled_direction);
+	hit_result.normal = ft_subtract(&hit_result.hitpoint,
+			hit_result.sphere->origin);
+
+	return (hit_result);
+}
+
 // draw sphere
 // (bx^2 + by^2 + bz^2)t^2 + 2(axbx + ayby azbz)t +
 // (ax^2 + ay^2 + az^2 - r^2) = 0
@@ -88,9 +102,12 @@ t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 	float		closest_t;
 	float		hit_distance;
 	t_sphere	*sphere;
+	t_sphere	*closest_sphere;
 	t_hit		hit_result;
 
 	closest_t = INFINITY;
+	closest_sphere = NULL;
+	hit_result.distance = INFINITY;
 	hit_result.sphere = NULL;
 	sphere = data->sphere;
 	while (sphere)
@@ -102,11 +119,12 @@ t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 			if (hit_distance < closest_t)
 			{
 				closest_t = hit_distance;
-				hit_result.sphere = sphere;
+				closest_sphere = sphere;
 			}
 		}
 		sphere = sphere->next;
 	}
-	hit_result.distance = closest_t;
+	if (closest_t < INFINITY)
+		hit_result = ft_set_hit_result(hit_result, closest_t, closest_sphere, ray);
 	return (hit_result);
 }
