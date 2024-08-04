@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_setup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: sveselov <sveselov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:31:58 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 16:54:05 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 18:04:25 by sveselov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_vector	ft_cross(t_vector *a, t_vector *b)
 }
 
 // set up basis vectors
-void	ft_set_camera_vectors(t_camera *camera)
+void	ft_set_camera_vectors(t_camera *camera, t_vector *forward)
 {
-	camera->right = ft_cross(&camera->direction, &(t_vector){0.0f, 1.0f, 0.0f});
+	camera->right = ft_cross(forward, &(t_vector){0.0f, 1.0f, 0.0f});
 	camera->right = ft_normalize(&camera->right);
-	camera->up = ft_cross(&camera->right, &camera->direction);
+	camera->up = ft_cross(&camera->right, forward);
 	camera->up = ft_normalize(&camera->up);
 }
 
@@ -47,8 +47,10 @@ void	ft_setup_camera(t_camera *camera)
 	float		viewport_width;
 	t_vector	viewport_x;
 	t_vector	viewport_y;
+	t_vector	forward;
 
-	ft_set_camera_vectors(camera);
+	forward = ft_scale(&camera->direction, -1.0f);
+	ft_set_camera_vectors(camera, &forward);
 	viewport_width = 2.0f * tan(camera->fov / 2.0f);
 	viewport_height = viewport_width * (float)HEIGHT / (float)WIDTH;
 	viewport_x = ft_scale(&camera->right, viewport_width);
