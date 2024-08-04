@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 12:31:40 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/21 14:19:03 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:30:52 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_parse_integer(const char **str)
 		result = result * 10 + (**str - '0');
 		(*str)++;
 	}
-
 	return (result);
 }
 
