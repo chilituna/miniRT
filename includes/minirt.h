@@ -6,7 +6,7 @@
 /*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 21:51:06 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/04 21:55:43 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,13 @@ void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 int			ft_calculate_gradient(int x, int y);
 int			ft_create_trgb(int t, double r, double g, double b);
 int			ft_trgb(int t, t_color *color);
+
+// Light
+t_vector	calculate_eye_vector(t_vector intersection_point, t_vector ray_origin);
+t_vector	calculate_light_vector(t_vector intersection_point, t_vector light_position);
+t_vector	calculate_normal_vector(t_vector intersection_point, t_sphere sphere);
+t_vector	calculate_reflection_vector(t_vector light_vector, t_vector normal_vector);
+float		ft_calculate_diffuse_lighting(t_vector *normal, t_vector *light_dir);
 
 // Utils vector math
 t_vector	ft_add(t_vector *v1, t_vector *v2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/07 21:35:43 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:53:49 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,16 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 // just to test out, calculate color based on the xyz hitpoint
 void	ft_put_color(t_data *data, int x, int y, t_hit hit)
 {
-	ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, &hit.sphere->color));
+	t_vector	diff = ft_subtract(&data->light->origin, &hit.hitpoint);
+	t_vector	light_dir = ft_normalize(&diff);
+	float		diffuse = ft_calculate_diffuse_lighting(&hit.normal, &light_dir);
+
+	t_color final_color;
+	final_color.r = (int)(hit.sphere->color.r * diffuse);
+	final_color.g = (int)(hit.sphere->color.g * diffuse);
+	final_color.b = (int)(hit.sphere->color.b * diffuse);
+
+	ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, &final_color));
 }
 
 void	ft_draw_pixel(t_data *data, int x, int y)
