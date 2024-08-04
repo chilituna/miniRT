@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 17:23:08 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 21:49:45 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,9 @@ t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 {
 	float		closest_t;
 	t_sphere	*sphere;
-	t_sphere	*closest_sphere;
 	t_hit		hit_result;
 
 	closest_t = INFINITY;
-	closest_sphere = NULL;
 	hit_result.distance = INFINITY;
 	hit_result.sphere = NULL;
 	sphere = data->sphere;
