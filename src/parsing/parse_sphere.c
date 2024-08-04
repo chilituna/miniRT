@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 08:52:00 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 14:51:30 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 16:49:08 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,10 @@
 void	ft_init_sphere(t_data *data, char *line)
 {
 	t_sphere	*new_sphere;
-	t_vector	*origin;
-	t_color		*color;
 
 	new_sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!new_sphere)
 		ft_parsing_error("Failed to allocate memory for sphere\n", data, line);
-	origin = (t_vector *)malloc(sizeof(t_vector));
-	if (!origin)
-		ft_parsing_error("Failed to malloc sphere origin\n", data, line);
-	color = (t_color *)malloc(sizeof(t_color));
-	if (!color)
-		ft_parsing_error("Failed to malloc sphere color\n", data, line);
-	new_sphere->origin = origin;
-	new_sphere->color = color;
 	if (data->sphere)
 	{
 		new_sphere->next = data->sphere;
@@ -46,13 +36,13 @@ void	ft_init_sphere(t_data *data, char *line)
 // Set sphere values
 void	ft_set_sphere(t_sphere *sphere, char **arr, char **pos, char **rgb)
 {
-	sphere->origin->x = ft_atof(pos[0]);
-	sphere->origin->y = ft_atof(pos[1]);
-	sphere->origin->z = ft_atof(pos[2]);
+	sphere->origin.x = ft_atof(pos[0]);
+	sphere->origin.y = ft_atof(pos[1]);
+	sphere->origin.z = ft_atof(pos[2]);
 	sphere->diameter = ft_atof(arr[2]);
-	sphere->color->r = ft_atoi(rgb[0]);
-	sphere->color->g = ft_atoi(rgb[1]);
-	sphere->color->b = ft_atoi(rgb[2]);
+	sphere->color.r = ft_atoi(rgb[0]);
+	sphere->color.g = ft_atoi(rgb[1]);
+	sphere->color.b = ft_atoi(rgb[2]);
 }
 
 void	ft_check_sphere_input(char **arr, t_data *data, char *line)

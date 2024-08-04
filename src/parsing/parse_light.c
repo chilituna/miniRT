@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:46:50 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/02 14:51:15 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 16:47:36 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,21 @@
 void	ft_init_light(t_data *data, char *line)
 {
 	t_light		*light;
-	t_vector	*origin;
 
 	if (data->light)
 		ft_parsing_error("Duplicate light\n", data, line);
 	light = (t_light *)malloc(sizeof(t_light));
 	if (!light)
 		ft_parsing_error("Failed to allocate memory for light\n", data, line);
-	origin = (t_vector *)malloc(sizeof(t_vector));
-	if (!origin)
-		ft_parsing_error("Failed to malloc light origin\n", data, line);
-	light->origin = origin;
 	data->light = light;
 }
 
 // Set the light struct
 void	ft_set_light(t_light *light, char **arr, char **pos)
 {
-	light->origin->x = ft_atof(pos[0]);
-	light->origin->y = ft_atof(pos[1]);
-	light->origin->z = ft_atof(pos[2]);
+	light->origin.x = ft_atof(pos[0]);
+	light->origin.y = ft_atof(pos[1]);
+	light->origin.z = ft_atof(pos[2]);
 	light->ratio = ft_atof(arr[2]);
 }
 

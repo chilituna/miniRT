@@ -6,14 +6,21 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 10:40:44 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/28 18:22:06 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 16:45:57 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	ft_init_cylinder_2(t_data *data, t_cylinder *new_cylinder)
+// Init the cylinder struct
+// and add it to the list
+void	ft_init_cylinder(t_data *data, char *l)
 {
+	t_cylinder	*new_cylinder;
+
+	new_cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
+	if (!new_cylinder)
+		ft_parsing_error("Failed to allocate memory for cylinder\n", data, l);
 	if (data->cylinder)
 	{
 		new_cylinder->next = data->cylinder;
@@ -26,31 +33,28 @@ void	ft_init_cylinder_2(t_data *data, t_cylinder *new_cylinder)
 	}
 }
 
-// Init the cylinder struct
-// and add it to the list
-void	ft_init_cylinder(t_data *data, char *l)
+// Set the cylinder values
+void	ft_set_cylinder(t_cylinder *cyl, char **pos, char **vec, char **rgb)
 {
-	t_cylinder	*new_cylinder;
-	t_vector	*origin;
-	t_vector	*orientation;
-	t_color		*color;
+	cyl->origin.x = ft_atof(pos[0]);
+	cyl->origin.y = ft_atof(pos[1]);
+	cyl->origin.z = ft_atof(pos[2]);
+	cyl->orientation.x = ft_atof(vec[0]);
+	cyl->orientation.y = ft_atof(vec[1]);
+	cyl->orientation.z = ft_atof(vec[2]);
+	cyl->color.r = ft_atoi(rgb[0]);
+	cyl->color.g = ft_atoi(rgb[1]);
+	cyl->color.b = ft_atoi(rgb[2]);
+	ft_free_array(pos);
+	ft_free_array(vec);
+	ft_free_array(rgb);
+}
 
-	new_cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
-	if (!new_cylinder)
-		ft_parsing_error("Failed to allocate memory for cylinder\n", data, l);
-	origin = (t_vector *)malloc(sizeof(t_vector));
-	if (!origin)
-		ft_parsing_error("Failed to malloc cylinder origin\n", data, l);
-	orientation = (t_vector *)malloc(sizeof(t_vector));
-	if (!orientation)
-		ft_parsing_error("Failed to malloc cylinder orientation\n", data, l);
-	color = (t_color *)malloc(sizeof(t_color));
-	if (!color)
-		ft_parsing_error("Failed to malloc cylinder color\n", data, l);
-	new_cylinder->origin = origin;
-	new_cylinder->orientation = orientation;
-	new_cylinder->color = color;
-	ft_init_cylinder_2(data, new_cylinder);
+void	ft_set_cylinder_2(t_cylinder *cylinder, char **arr)
+{
+	cylinder->diameter = ft_atof(arr[3]);
+	cylinder->height = ft_atof(arr[4]);
+	ft_free_array(arr);
 }
 
 void	ft_check_cylinder_input(char **arr, t_data *data, char *line)
