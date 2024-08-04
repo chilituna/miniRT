@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/03 23:46:13 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 13:48:54 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct s_hit
 	t_vector	hitpoint;
 	t_vector	normal;
 	t_sphere	*sphere;
+	t_color		color;
 }				t_hit;
 
 //Start program
@@ -194,6 +195,9 @@ void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 int			ft_calculate_gradient(int x, int y);
 int			ft_create_trgb(int t, double r, double g, double b);
 int			ft_trgb(int t, t_color *color);
+
+// Lighting
+t_color		ft_calculate_lighting(t_data *data, t_hit hit);
 
 // Utils vector math
 t_vector	ft_add(t_vector *v1, t_vector *v2);

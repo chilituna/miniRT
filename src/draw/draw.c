@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 00:02:13 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 13:56:02 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 // just to test out, calculate color based on the xyz hitpoint
 void	ft_put_color(t_data *data, int x, int y, t_hit hit)
 {
-	ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, hit.sphere->color));
+	ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, &hit.color));
 }
 
 // Draw the scene:
@@ -60,7 +60,11 @@ void	ft_draw_scene(t_data *data)
 			if (data->sphere)
 				hit_result = ft_hit_sphere(data, ray);
 			if (hit_result.distance < INFINITY)
+			{
+				printf("Hit at pixel (%d, %d), Distance: %.2f\n", x, y, hit_result.distance);
+				hit_result.color = ft_calculate_lighting(data, hit_result);
 				ft_put_color(data, x, y, hit_result);
+			}
 			x++;
 		}
 		y++;
