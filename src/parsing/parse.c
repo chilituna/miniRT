@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 14:41:45 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 21:52:15 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,16 @@ void	ft_check_identifier(char *line, t_data *data)
 // Parse the scene file line by line:
 void	ft_parsing(int fd, char *line, t_data *data)
 {
-	line = get_next_line(fd);
-	if (!line)
-		ft_error("Empty file\n", data);
-	free(line);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
+			if (data->line_count == 0)
+				ft_error("Empty file\n", data);
 			break ;
+		}
+		data->line_count++;
 		if (line[0] == '\n' || line[0] == '#')
 		{
 			free(line);

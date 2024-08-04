@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 16:43:25 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 21:51:06 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct s_data
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	int			line_count;
 }			t_data;
 
 // Hit distance and sphere
