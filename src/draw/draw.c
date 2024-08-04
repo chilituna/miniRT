@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: sveselov <sveselov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 17:25:27 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:37:47 by sveselov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ void	ft_draw_scene(t_data *data)
 		printf("\rDraw lines remaining: %d  ", HEIGHT - y);
 		while (x < WIDTH)
 		{
-			ft_draw_pixel(data, x, y);
+			pixel_center = ft_calculate_pixel_center(data->camera, x, y);
+			ray.direction = ft_calc_ray_direction(data->camera, x, y);
+			ray.origin = *data->camera->origin;
+			hit_result.distance = INFINITY;
+			if (data->sphere)
+				hit_result = ft_hit_sphere(data, ray);
+			if (hit_result.distance < INFINITY)
+				ft_put_color(data, x, y, hit_result);
 			x++;
 		}
 		y++;

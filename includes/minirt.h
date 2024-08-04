@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: sveselov <sveselov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 16:43:25 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:36:00 by sveselov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void		ft_check_size(char **arr, int i, t_data *data, char *l);
 void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
 void		ft_setup_camera(t_camera *camera);
+t_vector	ft_calc_ray_direction(t_data *data, int x, int y);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
