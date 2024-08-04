@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:24:20 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 00:01:09 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 16:47:03 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,12 @@
 void	ft_init_camera(t_data *data, char *line)
 {
 	t_camera	*camera;
-	t_vector	*origin;
-	t_vector	*direction;
 
 	if (data->camera)
 		ft_parsing_error("Duplicate camera\n", data, line);
 	camera = (t_camera *)malloc(sizeof(t_camera));
 	if (!camera)
 		ft_parsing_error("Failed to allocate memory for camera\n", data, line);
-	origin = (t_vector *)malloc(sizeof(t_vector));
-	if (!origin)
-		ft_parsing_error("Failed to malloc camera origin\n", data, line);
-	direction = (t_vector *)malloc(sizeof(t_vector));
-	if (!direction)
-		ft_parsing_error("Failed to malloc camera direction\n", data, line);
-	camera->origin = origin;
-	camera->direction = direction;
 	data->camera = camera;
 }
 
@@ -43,18 +33,18 @@ void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec)
 {
 	float		length;
 
-	camera->origin->x = ft_atof(pos[0]);
-	camera->origin->y = ft_atof(pos[1]);
-	camera->origin->z = ft_atof(pos[2]);
-	camera->direction->x = ft_atof(vec[0]);
-	camera->direction->y = ft_atof(vec[1]);
-	camera->direction->z = ft_atof(vec[2]);
-	length = sqrt(camera->direction->x * camera->direction->x
-			+ camera->direction->y * camera->direction->y
-			+ camera->direction->z * camera->direction->z);
-	camera->direction->x /= length;
-	camera->direction->z /= length;
-	camera->direction->y /= length;
+	camera->origin.x = ft_atof(pos[0]);
+	camera->origin.y = ft_atof(pos[1]);
+	camera->origin.z = ft_atof(pos[2]);
+	camera->direction.x = ft_atof(vec[0]);
+	camera->direction.y = ft_atof(vec[1]);
+	camera->direction.z = ft_atof(vec[2]);
+	length = sqrt(camera->direction.x * camera->direction.x
+			+ camera->direction.y * camera->direction.y
+			+ camera->direction.z * camera->direction.z);
+	camera->direction.x /= length;
+	camera->direction.z /= length;
+	camera->direction.y /= length;
 	camera->fov = ft_atof(arr[3]);
 	camera->fov *= M_PI / 180.0f;
 	camera->focal_length = 1.0f;

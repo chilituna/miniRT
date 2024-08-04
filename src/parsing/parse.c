@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/07/27 11:38:36 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:41:45 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,16 @@ void	ft_check_identifier(char *line, t_data *data)
 // Parse the scene file line by line:
 void	ft_parsing(int fd, char *line, t_data *data)
 {
+	line = get_next_line(fd);
+	if (!line)
+		ft_error("Empty file\n", data);
+	free(line);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		else if (line[0] == '\n' || line[0] == '#')
+		if (line[0] == '\n' || line[0] == '#')
 		{
 			free(line);
 			continue ;
@@ -69,6 +73,5 @@ void	ft_parsing(int fd, char *line, t_data *data)
 		else
 			ft_check_identifier(line, data);
 		free(line);
-		line = NULL;
 	}
 }

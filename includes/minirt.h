@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/03 23:46:13 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/04 16:43:25 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # endif
 # ifndef HEIGHT
 #  define HEIGHT 600
+# endif
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
 # endif
 
 // 3D vector
@@ -68,7 +71,7 @@ typedef struct s_mlx
 typedef struct s_ambient
 {
 	float	ratio;
-	t_color	*color;
+	t_color	color;
 }			t_ambient;
 
 // camera position
@@ -76,8 +79,8 @@ typedef struct s_ambient
 // horizontal field of view in degrees in range [0,180]
 typedef struct s_camera
 {
-	t_vector	*origin;
-	t_vector	*direction;
+	t_vector	origin;
+	t_vector	direction;
 	float		fov;
 	float		focal_length;
 	t_vector	up;
@@ -93,7 +96,7 @@ typedef struct s_camera
 // light brightness in range [0.0,1.0]
 typedef struct s_light
 {
-	t_vector	*origin;
+	t_vector	origin;
 	float		ratio;
 }				t_light;
 
@@ -102,9 +105,9 @@ typedef struct s_light
 // R,G,B colors in range [0-255]
 typedef struct s_sphere
 {
-	t_vector		*origin;
+	t_vector		origin;
 	float			diameter;
-	t_color			*color;
+	t_color			color;
 	struct s_sphere	*next;
 }			t_sphere;
 
@@ -113,9 +116,9 @@ typedef struct s_sphere
 // R,G,B colors in range [0-255]
 typedef struct s_plane
 {
-	t_vector		*origin;
-	t_vector		*orientation;
-	t_color			*color;
+	t_vector		origin;
+	t_vector		orientation;
+	t_color			color;
 	struct s_plane	*next;
 }			t_plane;
 
@@ -125,11 +128,11 @@ typedef struct s_plane
 // R,G,B colors in range [0-255]
 typedef struct s_cylinder
 {
-	t_vector			*origin;
-	t_vector			*orientation;
+	t_vector			origin;
+	t_vector			orientation;
 	float				diameter;
 	float				height;
-	t_color				*color;
+	t_color				color;
 	struct s_cylinder	*next;
 }					t_cylinder;
 
