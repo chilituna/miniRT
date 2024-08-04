@@ -6,7 +6,7 @@
 /*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/07 23:53:49 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/07 23:54:07 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,45 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 
 // Calculate the color and put it to image:
 // just to test out, calculate color based on the xyz hitpoint
-void	ft_put_color(t_data *data, int x, int y, t_hit hit)
+// void	ft_put_color(t_data *data, int x, int y, t_hit hit)
+// {
+// 	t_vector	diff = ft_subtract(&data->light->origin, &hit.hitpoint);
+// 	t_vector	light_dir = ft_normalize(&diff);
+// 	float		diffuse = ft_calculate_diffuse_lighting(&hit.normal, &light_dir);
+// 	t_color final_color;
+
+// 	printf("diffuse: %f\n", diffuse);
+// 	final_color.r = (int)(hit.sphere->color.r * diffuse);
+// 	final_color.g = (int)(hit.sphere->color.g * diffuse);
+// 	final_color.b = (int)(hit.sphere->color.b * diffuse);
+
+// 	ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, &final_color));
+// }
+
+void ft_put_color(t_data *data, int x, int y, t_hit hit)
 {
 	t_vector	diff = ft_subtract(&data->light->origin, &hit.hitpoint);
 	t_vector	light_dir = ft_normalize(&diff);
-	float		diffuse = ft_calculate_diffuse_lighting(&hit.normal, &light_dir);
+	float		diffuse = 0.0f;
+	t_color		ambient_color = {0, 0, 0};
+	t_color		final_color;
 
-	t_color final_color;
-	final_color.r = (int)(hit.sphere->color.r * diffuse);
-	final_color.g = (int)(hit.sphere->color.g * diffuse);
-	final_color.b = (int)(hit.sphere->color.b * diffuse);
+	ft_calculate_ambient_lighting(data, &ambient_color);
+	printf("Ambient Color: R=%d, G=%d, B=%d\n", ambient_color.r, ambient_color.g, ambient_color.b);
+
+	if (!ft_is_in_shadow(data, &hit.hitpoint, &light_dir))
+	{
+		diffuse = ft_calculate_diffuse_lighting(&hit.normal, &light_dir);
+		printf("Diffuse: %.2f\n", diffuse);
+	}
+	final_color.r = (int)(hit.sphere->color.r * (diffuse + ambient_color.r / 255.0f));
+	final_color.g = (int)(hit.sphere->color.g * (diffuse + ambient_color.g / 255.0f));
+	final_color.b = (int)(hit.sphere->color.b * (diffuse + ambient_color.b / 255.0f));
+	printf("Final Color before clamping: R=%d, G=%d, B=%d\n", final_color.r, final_color.g, final_color.b);
+	final_color.r = fminf(final_color.r, 255);
+	final_color.g = fminf(final_color.g, 255);
+	final_color.b = fminf(final_color.b, 255);
+	printf("Final Color after clamping: R=%d, G=%d, B=%d\n", final_color.r, final_color.g, final_color.b);
 
 	ft_my_mlx_pixel_put(data->mlx, x, y, ft_trgb(1, &final_color));
 }
@@ -69,10 +98,11 @@ void	ft_draw_scene(t_data *data)
 	y = 0;
 	x = 0;
 	ft_setup_camera(data->camera);
+	printf("y = %d\n", y);
+	printf("HEIGHT = %d\n", HEIGHT);
 	while (y < HEIGHT)
 	{
 		x = 0;
-		printf("\rDraw lines remaining: %d  ", HEIGHT - y);
 		while (x < WIDTH)
 		{
 			ft_draw_pixel(data, x, y);

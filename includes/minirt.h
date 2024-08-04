@@ -6,7 +6,7 @@
 /*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 21:55:43 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/04 22:42:19 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,11 +200,10 @@ int			ft_create_trgb(int t, double r, double g, double b);
 int			ft_trgb(int t, t_color *color);
 
 // Light
-t_vector	calculate_eye_vector(t_vector intersection_point, t_vector ray_origin);
-t_vector	calculate_light_vector(t_vector intersection_point, t_vector light_position);
-t_vector	calculate_normal_vector(t_vector intersection_point, t_sphere sphere);
-t_vector	calculate_reflection_vector(t_vector light_vector, t_vector normal_vector);
+
+void		ft_calculate_ambient_lighting(t_data *data, t_color *color);
 float		ft_calculate_diffuse_lighting(t_vector *normal, t_vector *light_dir);
+int			ft_is_in_shadow(t_data *data, t_vector *hit_point, t_vector *light_dir);
 
 // Utils vector math
 t_vector	ft_add(t_vector *v1, t_vector *v2);
@@ -212,6 +211,7 @@ t_vector	ft_subtract(t_vector *v1, t_vector *v2);
 t_vector	ft_scale(t_vector *v, float scale);
 t_vector	ft_normalize(t_vector *v);
 float		ft_dot(t_vector *v1, t_vector *v2);
+int			vector_length(t_vector *v);
 
 //Utils
 void		ft_normalize_whitespace(char *line);
