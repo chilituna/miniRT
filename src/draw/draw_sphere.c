@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 21:49:45 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/05 09:14:44 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,6 @@ float	ft_discriminant(t_sphere *sphere, t_ray ray)
 	return (b * b - 4.0f * a * c);
 }
 
-// t_hit	ft_set_hit_result(t_hit hit, float t, t_sphere *sphere, t_ray ray)
-// {
-// 	t_vector	scaled_direction;
-
-// 	scaled_direction = ft_scale(&ray.direction, t);
-// 	hit.sphere = sphere;
-// 	hit.distance = t;
-// 	hit.hitpoint = ft_add(&ray.origin, &scaled_direction);
-// 	hit.normal = ft_subtract(&hit.hitpoint,
-// 			&hit.sphere->origin);
-// 	return (hit);
-// }
-
 float	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 {
 	float		discriminant;
@@ -90,6 +77,7 @@ float	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 				hit->hitpoint = ft_add(&ray.origin, &scaled_direction);
 				hit->normal = ft_subtract(&hit->hitpoint,
 						&hit->sphere->origin);
+				hit->normal = ft_normalize(&hit->normal);
 			}
 		}
 		sphere = sphere->next;
