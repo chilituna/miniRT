@@ -6,7 +6,7 @@
 /*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 22:42:19 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/08 00:22:25 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,10 @@ int			ft_trgb(int t, t_color *color);
 // Light
 
 void		ft_calculate_ambient_lighting(t_data *data, t_color *color);
-float		ft_calculate_diffuse_lighting(t_vector *normal, t_vector *light_dir);
-int			ft_is_in_shadow(t_data *data, t_vector *hit_point, t_vector *light_dir);
+float		ft_calculate_diffuse_lighting(t_vector *normal,
+				t_vector *light_dir);
+int			ft_is_in_shadow(t_data *data, t_vector *hit_point,
+				t_vector *light_dir);
 
 // Utils vector math
 t_vector	ft_add(t_vector *v1, t_vector *v2);
