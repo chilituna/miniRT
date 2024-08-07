@@ -6,7 +6,7 @@
 /*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 21:55:50 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/08 00:12:09 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ void	ft_check_identifier(char *line, t_data *data)
 {
 	if (line[0] == 'A')
 	{
-		printf("line: %s\n", line);
 		ft_parse_ambient(line, data);
 	}
 	else if (line[0] == 'C')
 	{
 		ft_parse_camera(line, data);
-		printf("line camera: %s\n", line);
 	}
 	else if (line[0] == 'L')
 		ft_parse_light(line, data);

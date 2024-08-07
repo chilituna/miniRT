@@ -6,7 +6,7 @@
 /*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:46:50 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 21:15:34 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/08 00:09:41 by s0nia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ void	ft_parse_light(char *line, t_data *data)
 		ft_parsing_error("Invalid light position\n", data, line);
 	ft_check_light_ratio(arr, pos, data, line);
 	ft_set_light(data->light, arr, pos);
-	printf("Light parsed: position (%f, %f, %f), ratio %f\n", 
-           data->light->origin.x, data->light->origin.y, data->light->origin.z, 
-           data->light->ratio);
 	ft_free_array(arr);
 	ft_free_array(pos);
 }
