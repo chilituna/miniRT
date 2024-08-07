@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/05 09:14:44 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:16:22 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ float	ft_discriminant(t_sphere *sphere, t_ray ray)
 	return (b * b - 4.0f * a * c);
 }
 
-float	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
+void	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 {
 	float		discriminant;
 	float		hit_distance;
@@ -78,11 +78,15 @@ float	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 				hit->normal = ft_subtract(&hit->hitpoint,
 						&hit->sphere->origin);
 				hit->normal = ft_normalize(&hit->normal);
+				// printf("Hit distance: %f\n", hit->distance);
+				// printf("ray direction: %f %f %f\n", ray.direction.x,
+				// 		hit->hitpoint.y, hit->hitpoint.z);
+				// printf("Normal: %f %f %f\n", hit->normal.x,
+				// 		hit->normal.y, hit->normal.z);
 			}
 		}
 		sphere = sphere->next;
 	}
-	return (t);
 }
 
 // draw sphere
@@ -96,6 +100,6 @@ t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 	hit_result.distance = INFINITY;
 	hit_result.sphere = NULL;
 	sphere = data->sphere;
-	closest_t = ft_find_closest(sphere, ray, &hit_result, closest_t);
+	ft_find_closest(sphere, ray, &hit_result, closest_t);
 	return (hit_result);
 }

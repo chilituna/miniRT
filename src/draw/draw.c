@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 17:25:27 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:18:30 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 	scaled_y = ft_scale(&camera->pixel_delta_y, (float)y);
 	pixel_center = ft_add(&scaled_x, &scaled_y);
 	pixel_center = ft_add(&pixel_center, &camera->pixel00_location);
+	if (x == 0 && y == 0)
+		printf("x = 0, y = 0 -- pixel center: %f %f %f\n", pixel_center.x, pixel_center.y, pixel_center.z);
+	if (x == 400 && y == 300)
+		printf("x = 399, y = 299 -- pixel center: %f %f %f\n", pixel_center.x, pixel_center.y, pixel_center.z);
+	if (x == 799 && y == 599)
+		printf("x = 799, y = 599 -- pixel center: %f %f %f\n", pixel_center.x, pixel_center.y, pixel_center.z);
+
 	return (pixel_center);
 }
 
@@ -46,6 +53,12 @@ void	ft_draw_pixel(t_data *data, int x, int y)
 		hit_result = ft_hit_sphere(data, ray);
 	if (hit_result.distance < INFINITY)
 		ft_put_color(data, x, y, hit_result);
+	if (x == 0 && y == 0)
+		printf("x = 0, y = 0 -- ray direction: %f %f %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
+	if (x == 400 && y == 300)
+		printf("x = 399, y = 299 -- ray direction: %f %f %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
+	if (x == 799 && y == 599)
+		printf("x = 799, y = 599 -- ray direction: %f %f %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
 }
 
 // Draw the scene:
@@ -63,7 +76,7 @@ void	ft_draw_scene(t_data *data)
 	while (y < HEIGHT)
 	{
 		x = 0;
-		printf("\rDraw lines remaining: %d  ", HEIGHT - y);
+		// printf("\rDraw lines remaining: %d  ", HEIGHT - y);
 		while (x < WIDTH)
 		{
 			ft_draw_pixel(data, x, y);
