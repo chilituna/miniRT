@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/08/04 16:46:37 by aarponen         ###   ########.fr        #
+#    Updated: 2024/08/04 21:09:03 by s0nia            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ SRC = src/main.c src/init.c src/launch.c \
 	src/parsing/parse.c  src/parsing/parse_ambient.c src/parsing/parse_camera.c \
 	src/parsing/parse_light.c src/parsing/parse_sphere.c src/parsing/parse_plane.c \
 	src/parsing/parse_cylinder.c src/parsing/parse_utils.c \
-	src/draw/draw.c src/draw/draw_sphere.c \
+	src/draw/draw.c src/draw/draw_sphere.c src/draw/lighting.c \
 	src/draw/draw_utils.c src/draw/utils_vector_math.c \
-	src/draw/camera_setup.c \
+	src/draw/camera_setup.c src/draw/vector_operations.c \
 	src/utils.c src/hooks.c
 OBJ = $(SRC:.c=.o)
 
