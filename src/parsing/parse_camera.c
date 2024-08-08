@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:24:20 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 16:47:03 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:14:59 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,15 @@ void	ft_init_camera(t_data *data, char *line)
 }
 
 // Set the camera struct
-// Normalize the direction vector
-// Set focal length to 1.0f
-// Convert fov to radians
 void	ft_set_camera(t_camera *camera, char **arr, char **pos, char **vec)
 {
-	float		length;
-
 	camera->origin.x = ft_atof(pos[0]);
 	camera->origin.y = ft_atof(pos[1]);
 	camera->origin.z = ft_atof(pos[2]);
 	camera->direction.x = ft_atof(vec[0]);
 	camera->direction.y = ft_atof(vec[1]);
 	camera->direction.z = ft_atof(vec[2]);
-	length = sqrt(camera->direction.x * camera->direction.x
-			+ camera->direction.y * camera->direction.y
-			+ camera->direction.z * camera->direction.z);
-	camera->direction.x /= length;
-	camera->direction.z /= length;
-	camera->direction.y /= length;
 	camera->fov = ft_atof(arr[3]);
-	camera->fov *= M_PI / 180.0f;
-	camera->focal_length = 1.0f;
 }
 
 int	ft_check_fov(char **arr, char **pos, char **vec)

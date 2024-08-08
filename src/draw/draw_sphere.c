@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/05 09:14:44 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/07 21:21:51 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float	ft_closest_hit_sphere(t_sphere *sphere, t_ray ray, float discriminant)
 
 	oc = ft_subtract(&sphere->origin, &ray.origin);
 	a = ft_dot(&ray.direction, &ray.direction);
-	b = 2.0 * ft_dot(&ray.direction, &oc);
+	b = -2.0 * ft_dot(&ray.direction, &oc);
 	t1 = (-b - sqrt(discriminant)) / (2.0f * a);
 	t2 = (-b + sqrt(discriminant)) / (2.0f * a);
 	if (t1 > 0 && (t1 < t2))
@@ -56,7 +56,7 @@ float	ft_discriminant(t_sphere *sphere, t_ray ray)
 	return (b * b - 4.0f * a * c);
 }
 
-float	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
+void	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 {
 	float		discriminant;
 	float		hit_distance;
@@ -82,7 +82,6 @@ float	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 		}
 		sphere = sphere->next;
 	}
-	return (t);
 }
 
 // draw sphere
@@ -96,6 +95,6 @@ t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 	hit_result.distance = INFINITY;
 	hit_result.sphere = NULL;
 	sphere = data->sphere;
-	closest_t = ft_find_closest(sphere, ray, &hit_result, closest_t);
+	ft_find_closest(sphere, ray, &hit_result, closest_t);
 	return (hit_result);
 }
