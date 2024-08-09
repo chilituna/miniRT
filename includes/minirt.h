@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/08 00:22:25 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/09 15:12:21 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ typedef struct s_sphere
 	struct s_sphere	*next;
 }			t_sphere;
 
-// plane position
-// orientation: In range [-1,1] for each x,y,z
+// coordinates of a point in the plane
+// 3d normalized normal vector. In range [-1,1] for each x,y,z axis:
 // R,G,B colors in range [0-255]
 typedef struct s_plane
 {
 	t_vector		origin;
-	t_vector		orientation;
+	t_vector		normal;
 	t_color			color;
 	struct s_plane	*next;
 }			t_plane;
@@ -155,6 +155,7 @@ typedef struct s_hit
 	t_vector	hitpoint;
 	t_vector	normal;
 	t_sphere	*sphere;
+	t_plane		*plane;
 }				t_hit;
 
 //Start program
@@ -189,9 +190,11 @@ int			ft_check_rgb_2(char **arr, char **pos, char **vec, char **rgb);
 void		ft_check_size(char **arr, int i, t_data *data, char *l);
 
 // Drawing
+void		ft_setup_camera(t_camera *camera);
 void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
-void		ft_setup_camera(t_camera *camera);
+t_hit		ft_hit_plane(t_data *data, t_ray ray);
+void		ft_put_color(t_data *data, int x, int y, t_hit hit);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
