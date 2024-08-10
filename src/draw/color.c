@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:08:16 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/09 15:11:42 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:38:11 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,19 @@ t_color	ft_plane_color(t_hit hit, float diffuse, t_color ambient_color)
 	return (final_color);
 }
 
+t_color	ft_cylinder_color(t_hit hit, float diffuse, t_color ambient_color)
+{
+	t_color	final_color;
+
+	final_color.r = (int)(hit.cylinder->color.r
+			* (diffuse + ambient_color.r / 255.0f));
+	final_color.g = (int)(hit.cylinder->color.g
+			* (diffuse + ambient_color.g / 255.0f));
+	final_color.b = (int)(hit.cylinder->color.b
+			* (diffuse + ambient_color.b / 255.0f));
+	return (final_color);
+}
+
 void	ft_put_color(t_data *data, int x, int y, t_hit hit)
 {
 	t_vector	diff;
@@ -75,6 +88,8 @@ void	ft_put_color(t_data *data, int x, int y, t_hit hit)
 		final_color = ft_sphere_color(hit, diffuse, ambient_color);
 	else if (hit.plane)
 		final_color = ft_plane_color(hit, diffuse, ambient_color);
+	else if (hit.cylinder)
+		final_color = ft_cylinder_color(hit, diffuse, ambient_color);
 	final_color.r = fminf(final_color.r, 255);
 	final_color.g = fminf(final_color.g, 255);
 	final_color.b = fminf(final_color.b, 255);

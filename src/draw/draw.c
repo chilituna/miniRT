@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/09 15:20:07 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:22:06 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	ft_draw_pixel(t_data *data, int x, int y)
 		hit_result = ft_hit_sphere(data, ray);
 	if (data->plane)
 		tmp_hit = ft_hit_plane(data, ray);
+	if (tmp_hit.distance < hit_result.distance)
+		hit_result = tmp_hit;
+	if (data->cylinder)
+		tmp_hit = ft_hit_cylinder(data, ray);
 	if (tmp_hit.distance < hit_result.distance)
 		hit_result = tmp_hit;
 	if (hit_result.distance < INFINITY)

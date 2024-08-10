@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/09 15:12:21 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:15:53 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_hit
 	t_vector	normal;
 	t_sphere	*sphere;
 	t_plane		*plane;
+	t_cylinder	*cylinder;
 }				t_hit;
 
 //Start program
@@ -194,6 +195,7 @@ void		ft_setup_camera(t_camera *camera);
 void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
 t_hit		ft_hit_plane(t_data *data, t_ray ray);
+t_hit		ft_hit_cylinder(t_data *data, t_ray ray);
 void		ft_put_color(t_data *data, int x, int y, t_hit hit);
 
 // Drawing utils
@@ -216,13 +218,15 @@ t_vector	ft_subtract(t_vector *v1, t_vector *v2);
 t_vector	ft_scale(t_vector *v, float scale);
 t_vector	ft_normalize(t_vector *v);
 float		ft_dot(t_vector *v1, t_vector *v2);
+t_vector	ft_cross(t_vector *a, t_vector *b);
+t_vector	ft_perpendicular(t_vector *a, t_vector *b);
 int			vector_length(t_vector *v);
 
-//Utils
+// Other Utils
 void		ft_normalize_whitespace(char *line);
 void		ft_remove_whitespace(char **arr);
 
-//Hooks
+// Hooks
 int			ft_key_handle(int keysym, t_data *data);
 int			ft_mouse_quit(t_data *data);
 
