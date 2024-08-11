@@ -6,7 +6,7 @@
 #    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/08/11 11:43:14 by aarponen         ###   ########.fr        #
+#    Updated: 2024/08/11 19:23:40 by aarponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OBJ = $(SRC:.c=.o)
 HDR = includes/minirt.h
 
 # Executable name
-NAME = minirt
+NAME = miniRT
 
 # Default rule
 all: mlx libft $(NAME)

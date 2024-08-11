@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/09 14:47:48 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 19:36:22 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_parse_scene(char *file, t_data *data)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		ft_error("Error: Could not open file\n", data);
+		ft_error("Could not open file\n", data);
 	line = NULL;
 	ft_parsing(fd, line, data);
 	close(fd);
