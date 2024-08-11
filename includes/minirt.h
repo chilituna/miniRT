@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 17:15:53 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:42:13 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
 t_hit		ft_hit_plane(t_data *data, t_ray ray);
 t_hit		ft_hit_cylinder(t_data *data, t_ray ray);
+float		ft_inter_cap(t_cylinder *cylinder, t_ray ray);
 void		ft_put_color(t_data *data, int x, int y, t_hit hit);
 
 // Drawing utils
@@ -220,7 +221,7 @@ t_vector	ft_normalize(t_vector *v);
 float		ft_dot(t_vector *v1, t_vector *v2);
 t_vector	ft_cross(t_vector *a, t_vector *b);
 t_vector	ft_perpendicular(t_vector *a, t_vector *b);
-int			vector_length(t_vector *v);
+float		ft_vector_length(t_vector *v);
 
 // Other Utils
 void		ft_normalize_whitespace(char *line);

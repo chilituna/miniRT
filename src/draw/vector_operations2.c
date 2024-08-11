@@ -6,12 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:03:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 17:15:37 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:37:57 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
 
 // cross priduct of two vectors
 // needed to calculate the right and up vectors

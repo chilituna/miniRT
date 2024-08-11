@@ -6,34 +6,29 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:15:29 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 17:53:08 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:07:33 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-// Function to calculate the closest hit of the cylinder:
-// t1 = (-b - sqrt(discriminant)) / (2.0f * a);
-// t2 = (-b + sqrt(discriminant)) / (2.0f * a);
-float	ft_closest_hit_cylinder(t_cylinder *cyl, t_ray ray, float t)
+// calculate the intersection with infinite cylinder
+// check if the hit is within the cylinder height
+int	ft_check_height(t_cylinder *cylinder, t_ray ray, float t)
 {
-	float		t1;
-	float		t2;
-	t_vector	oc;
-	float		a;
-	float		b;
+	t_vector	hitpoint;
+	float		projected_height;
+	t_vector	scaled_direction;
+	t_vector	subtracted;
 
-	oc = ft_subtract(&cyl->origin, &ray.origin);
-	a = ft_dot(&ray.direction, &ray.direction);
-	b = -2.0 * ft_dot(&ray.direction, &oc);
-	t1 = (-b - sqrt(t)) / (2.0f * a);
-	t2 = (-b + sqrt(t)) / (2.0f * a);
-	if (t1 > 0 && (t1 < t2))
-		return (t1);
-	if (t2 > 0)
-		return (t2);
-	return (INFINITY);
-
+	scaled_direction = ft_scale(&ray.direction, t);
+	hitpoint = ft_add(&ray.origin, &scaled_direction);
+	subtracted = ft_subtract(&hitpoint, &cylinder->origin);
+	projected_height = ft_dot(&subtracted, &cylinder->orientation);
+	if (projected_height >= -cylinder->height / 2.0f && projected_height
+		<= cylinder->height / 2.0f)
+		return (1);
+	return (0);
 }
 
 // Determine if the ray intersects the cylinder:
@@ -60,60 +55,79 @@ float	ft_closest_hit_cylinder(t_cylinder *cyl, t_ray ray, float t)
 
 // 2: intersection with the cylinder caps
 
-float	ft_inter_c(t_cylinder *cylinder, t_ray ray)
+float	*ft_discriminant_c(t_cylinder *cylinder, t_ray ray)
 {
-	t_vector	oc;
 	t_vector	perp_dir;
 	t_vector	perp_oc;
-	float		a;
-	float		b;
-	float		c;
-	float		discriminant;
+	float		*calc;
 
-	oc = ft_subtract(&ray.origin, &cylinder->origin);
+	calc = (float *)malloc(sizeof(float) * 4);
+	if (!calc)
+		return (NULL);
 	perp_dir = ft_perpendicular(&ray.direction, &cylinder->orientation);
-	perp_oc = ft_perpendicular(&oc, &cylinder->orientation);
-	a = ft_dot(&perp_dir, &perp_dir);
-	b = 2.0 * ft_dot(&perp_dir, &perp_oc);
-	c = ft_dot(&perp_oc, &perp_oc) - (cylinder->diameter / 2.0f)
+	perp_oc = ft_subtract(&ray.origin, &cylinder->origin);
+	perp_oc = ft_perpendicular(&perp_oc, &cylinder->orientation);
+	calc[0] = ft_dot(&perp_dir, &perp_dir);
+	calc[1] = 2.0 * ft_dot(&perp_dir, &perp_oc);
+	calc[2] = ft_dot(&perp_oc, &perp_oc) - (cylinder->diameter / 2.0f)
 		* (cylinder->diameter / 2.0f);
-	discriminant = b * b - 4.0f * a * c;
-	if (discriminant >= 0)
-	{
-		if (ft_check_height(cylinder, ray, a, b, c, discriminant))
-			return (ft_closest_hit_cylinder(cylinder, ray, discriminant));
-	}
-	else
-	{
-		if (ft_inter_cap(cylinder, ray))
-			return (ft_closest_hit_cylinder(cylinder, ray, discriminant));
-	}
-	return (-1);
+	calc[3] = calc[1] * calc[1] - 4.0f * calc[0] * calc[2];
+	return (calc);
 }
 
-void	ft_find_closest_c(t_cylinder *cylinder, t_ray ray, t_hit *hit, float t)
+// calc = {a, b, c, discriminant}
+float	ft_inter_c(t_cylinder *cylinder, t_ray ray, t_data *data)
 {
+	float		*calc;
+	float		t1;
+	float		t2;
+
+	calc = ft_discriminant_c(cylinder, ray);
+	if (!calc)
+		ft_error("Malloc failed", data);
+	if (calc[3] >= 0)
+	{
+		t1 = (-calc[1] - sqrt(calc[3])) / (2.0f * calc[0]);
+		t2 = (-calc[1] + sqrt(calc[3])) / (2.0f * calc[0]);
+		if (t1 > 0 && ft_check_height(cylinder, ray, t1))
+		{
+			free(calc);
+			return (t1);
+		}
+		if (t2 > 0 && ft_check_height(cylinder, ray, t2))
+		{
+			free(calc);
+			return (t2);
+		}
+	}
+	t1 = ft_inter_cap(cylinder, ray);
+	free(calc);
+	return (t1);
+}
+
+void	ft_find_closest_c(t_data *data, t_ray ray, t_hit *hit, float t)
+{
+	t_cylinder	*cylinder;
 	float		hit_distance;
 	t_vector	scaled_direction;
 
+	cylinder = data->cylinder;
 	while (cylinder)
 	{
-		hit_distance = ft_inter_c(cylinder, ray);
-		if (hit_distance >= 0)
+		cylinder->orientation = ft_normalize(&cylinder->orientation);
+		hit_distance = ft_inter_c(cylinder, ray, data);
+		if (hit_distance < t)
 		{
-			hit_distance = ft_closest_hit_cylinder(cylinder, ray, hit_distance);
-			if (hit_distance < t)
-			{
-				t = hit_distance;
-				hit->cylinder = cylinder;
-				hit->distance = hit_distance;
-				scaled_direction = ft_scale(&ray.direction, t);
-				hit->hitpoint = ft_add(&ray.origin, &scaled_direction);
-				hit->normal = ft_subtract(&hit->hitpoint,
-						&hit->cylinder->origin);
-				hit->normal = ft_normalize(&hit->normal);
-				hit->plane = NULL;
-			}
+			t = hit_distance;
+			hit->cylinder = cylinder;
+			hit->distance = hit_distance;
+			scaled_direction = ft_scale(&ray.direction, t);
+			hit->hitpoint = ft_add(&ray.origin, &scaled_direction);
+			hit->normal = ft_subtract(&hit->hitpoint,
+					&hit->cylinder->origin);
+			hit->normal = ft_normalize(&hit->normal);
+			hit->sphere = NULL;
+			hit->plane = NULL;
 		}
 		cylinder = cylinder->next;
 	}
@@ -123,13 +137,12 @@ void	ft_find_closest_c(t_cylinder *cylinder, t_ray ray, t_hit *hit, float t)
 t_hit	ft_hit_cylinder(t_data *data, t_ray ray)
 {
 	float		closest_t;
-	t_cylinder	*cylinder;
 	t_hit		hit_result;
 
 	closest_t = INFINITY;
 	hit_result.distance = INFINITY;
 	hit_result.sphere = NULL;
-	cylinder = data->cylinder;
-	ft_find_closest_c(cylinder, ray, &hit_result, closest_t);
+	hit_result.plane = NULL;
+	ft_find_closest_c(data, ray, &hit_result, closest_t);
 	return (hit_result);
 }

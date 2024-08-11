@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:04:27 by s0nia             #+#    #+#             */
-/*   Updated: 2024/08/08 00:07:04 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/11 11:25:13 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_is_in_shadow(t_data *data, t_vector *hit_point, t_vector *light_dir)
 	shadow_ray.direction = *light_dir;
 	shadow_hit = ft_hit_sphere(data, shadow_ray);
 	light_vector = ft_subtract(&data->light->origin, hit_point);
-	light_distance = vector_length(&light_vector);
-	return (shadow_hit.distance > 0.001f 
+	light_distance = ft_vector_length(&light_vector);
+	return (shadow_hit.distance > 0.001f
 		&& shadow_hit.distance < light_distance);
 }

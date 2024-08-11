@@ -6,13 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:31:58 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 17:10:11 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:37:45 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-
 
 // set up basis vectors
 void	ft_set_camera_vectors(t_camera *camera)

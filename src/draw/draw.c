@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:09:43 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 17:22:06 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:08:54 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ t_vector	ft_calculate_pixel_center(t_camera *camera, int x, int y)
 	return (pixel_center);
 }
 
+void	ft_init_hit(t_hit *hit)
+{
+	hit->distance = INFINITY;
+	hit->sphere = NULL;
+	hit->plane = NULL;
+	hit->cylinder = NULL;
+}
+
 void	ft_draw_pixel(t_data *data, int x, int y)
 {
 	t_hit		hit_result;
@@ -32,11 +40,11 @@ void	ft_draw_pixel(t_data *data, int x, int y)
 	t_vector	pixel_center;
 	t_ray		ray;
 
-	hit_result.distance = INFINITY;
-	hit_result.sphere = NULL;
-	hit_result.plane = NULL;
+	ft_init_hit(&hit_result);
+	ft_init_hit(&tmp_hit);
 	pixel_center = ft_calculate_pixel_center(data->camera, x, y);
 	ray.direction = ft_subtract(&pixel_center, &data->camera->origin);
+	ray.direction = ft_normalize(&ray.direction);
 	ray.origin = data->camera->origin;
 	if (data->sphere)
 		hit_result = ft_hit_sphere(data, ray);
@@ -64,6 +72,7 @@ void	ft_draw_scene(t_data *data)
 	y = 0;
 	x = 0;
 	ft_setup_camera(data->camera);
+	printf("Drawing scene...\n");
 	while (y < HEIGHT)
 	{
 		x = 0;

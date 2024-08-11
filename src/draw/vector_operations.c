@@ -6,13 +6,13 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:00:50 by s0nia             #+#    #+#             */
-/*   Updated: 2024/08/10 17:15:28 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:24:20 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int	vector_length(t_vector *v)
+float	ft_vector_length(t_vector *v)
 {
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
 }
