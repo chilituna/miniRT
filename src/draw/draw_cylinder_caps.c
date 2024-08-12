@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 11:41:23 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/11 11:44:19 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/12 09:38:49 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ float	ft_hit_cap(t_cylinder *cylinder, t_ray ray, t_vector cap_center)
 // if the ray intersects either of the caps, return the hit distance
 float	ft_inter_cap(t_cylinder *cylinder, t_ray ray)
 {
-	float		dist_to_cap;
 	t_vector	scaled_direction;
 	t_vector	cap_center_bottom;
 	t_vector	cap_center_top;
+	float		closest_t;
 	float		t;
 
-	dist_to_cap = cylinder->height / 2.0f;
-	scaled_direction = ft_scale(&cylinder->orientation, dist_to_cap);
+	closest_t = INFINITY;
+	scaled_direction = ft_scale(&cylinder->orientation,
+			(cylinder->height / 2.0f));
 	cap_center_bottom = ft_subtract(&cylinder->origin, &scaled_direction);
 	cap_center_top = ft_add(&cylinder->origin, &scaled_direction);
 	t = ft_hit_cap(cylinder, ray, cap_center_bottom);
 	if (t != INFINITY)
-		return (t);
+		closest_t = t;
 	t = ft_hit_cap(cylinder, ray, cap_center_top);
-	return (t);
+	if (t != INFINITY && t < closest_t)
+		closest_t = t;
+	return (closest_t);
 }

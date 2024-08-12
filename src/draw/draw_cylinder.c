@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:15:29 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/11 12:07:33 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/12 09:39:26 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ float	ft_inter_c(t_cylinder *cylinder, t_ray ray, t_data *data)
 	float		*calc;
 	float		t1;
 	float		t2;
+	float		t3;
+	float		closest_t;
 
+	closest_t = INFINITY;
 	calc = ft_discriminant_c(cylinder, ray);
 	if (!calc)
 		ft_error("Malloc failed", data);
@@ -90,19 +93,15 @@ float	ft_inter_c(t_cylinder *cylinder, t_ray ray, t_data *data)
 		t1 = (-calc[1] - sqrt(calc[3])) / (2.0f * calc[0]);
 		t2 = (-calc[1] + sqrt(calc[3])) / (2.0f * calc[0]);
 		if (t1 > 0 && ft_check_height(cylinder, ray, t1))
-		{
-			free(calc);
-			return (t1);
-		}
-		if (t2 > 0 && ft_check_height(cylinder, ray, t2))
-		{
-			free(calc);
-			return (t2);
-		}
+			closest_t = t1;
+		if (t2 > 0 && ft_check_height(cylinder, ray, t2) && t2 < closest_t)
+			closest_t = t2;
 	}
-	t1 = ft_inter_cap(cylinder, ray);
+	t3 = ft_inter_cap(cylinder, ray);
+	if (t3 < closest_t)
+		closest_t = t3;
 	free(calc);
-	return (t1);
+	return (closest_t);
 }
 
 void	ft_find_closest_c(t_data *data, t_ray ray, t_hit *hit, float t)
