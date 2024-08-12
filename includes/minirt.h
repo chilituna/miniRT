@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/11 19:27:55 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:28:11 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct s_hit
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	int			cylinder_cap;
 }				t_hit;
 
 //Start program
@@ -196,7 +197,10 @@ void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
 t_hit		ft_hit_plane(t_data *data, t_ray ray);
 t_hit		ft_hit_cylinder(t_data *data, t_ray ray);
-float		ft_inter_cap(t_cylinder *cylinder, t_ray ray);
+float		ft_inter_cap(t_cylinder *cylinder, t_ray ray, float comp_t,
+				t_hit *hit);
+int			ft_check_height(t_cylinder *cylinder, t_ray ray, float t);
+void		ft_calculate_normal_c(t_cylinder *cylinder, t_hit *hit);
 void		ft_put_color(t_data *data, int x, int y, t_hit hit);
 
 // Drawing utils

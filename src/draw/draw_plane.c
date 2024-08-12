@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:57:57 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 16:47:02 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:48:48 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_find_closest_p(t_plane *plane, t_ray ray, t_hit *hit, float t)
 
 	while (plane)
 	{
+		plane->normal = ft_normalize(&plane->normal);
 		hit_distance = ft_intersection(plane, ray);
 		if (hit_distance >= 0)
 		{
@@ -48,9 +49,7 @@ void	ft_find_closest_p(t_plane *plane, t_ray ray, t_hit *hit, float t)
 				hit->distance = hit_distance;
 				scaled_direction = ft_scale(&ray.direction, t);
 				hit->hitpoint = ft_add(&ray.origin, &scaled_direction);
-				hit->normal = ft_subtract(&hit->hitpoint,
-						&hit->plane->origin);
-				hit->normal = ft_normalize(&hit->normal);
+				hit->normal = plane->normal;
 				hit->sphere = NULL;
 				hit->cylinder = NULL;
 			}

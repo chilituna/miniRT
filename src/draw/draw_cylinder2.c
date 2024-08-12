@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 11:41:23 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/12 09:38:49 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:26:49 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ float	ft_hit_cap(t_cylinder *cylinder, t_ray ray, t_vector cap_center)
 // calculate the center of the bottom and top caps
 // send both caps to the hit_cap function
 // if the ray intersects either of the caps, return the hit distance
-float	ft_inter_cap(t_cylinder *cylinder, t_ray ray)
+float	ft_inter_cap(t_cylinder *cylinder, t_ray ray, float comp_t, t_hit *hit)
 {
 	t_vector	scaled_direction;
 	t_vector	cap_center_bottom;
@@ -58,5 +58,44 @@ float	ft_inter_cap(t_cylinder *cylinder, t_ray ray)
 	t = ft_hit_cap(cylinder, ray, cap_center_top);
 	if (t != INFINITY && t < closest_t)
 		closest_t = t;
+	if (closest_t < comp_t)
+		hit->cylinder_cap = 1;
 	return (closest_t);
+}
+
+// calculate the intersection with infinite cylinder
+// check if the hit is within the cylinder height
+int	ft_check_height(t_cylinder *cylinder, t_ray ray, float t)
+{
+	t_vector	hitpoint;
+	float		projected_height;
+	t_vector	scaled_direction;
+	t_vector	subtracted;
+
+	scaled_direction = ft_scale(&ray.direction, t);
+	hitpoint = ft_add(&ray.origin, &scaled_direction);
+	subtracted = ft_subtract(&hitpoint, &cylinder->origin);
+	projected_height = ft_dot(&subtracted, &cylinder->orientation);
+	if (projected_height >= -cylinder->height / 2.0f && projected_height
+		<= cylinder->height / 2.0f)
+		return (1);
+	return (0);
+}
+
+// calculate the normal vector of the hit point
+void	ft_calculate_normal_c(t_cylinder *cylinder, t_hit *hit)
+{
+	t_vector	projection;
+	t_vector	hit_to_origin;
+
+	if (hit->cylinder_cap)
+	{
+		hit->normal = cylinder->orientation;
+		return ;
+	}
+	hit_to_origin = ft_subtract(&hit->hitpoint, &cylinder->origin);
+	projection = ft_scale(&cylinder->orientation, ft_dot(&hit_to_origin,
+				&cylinder->orientation));
+	hit->normal = ft_subtract(&hit_to_origin, &projection);
+	hit->normal = ft_normalize(&hit->normal);
 }
