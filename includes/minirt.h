@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/08 00:22:25 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/12 17:28:11 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include "../Libft/libft.h"
 
 # ifndef WIDTH
-#  define WIDTH 800
+#  define WIDTH 1600
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 600
+#  define HEIGHT 1000
 # endif
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -111,13 +111,13 @@ typedef struct s_sphere
 	struct s_sphere	*next;
 }			t_sphere;
 
-// plane position
-// orientation: In range [-1,1] for each x,y,z
+// coordinates of a point in the plane
+// 3d normalized normal vector. In range [-1,1] for each x,y,z axis:
 // R,G,B colors in range [0-255]
 typedef struct s_plane
 {
 	t_vector		origin;
-	t_vector		orientation;
+	t_vector		normal;
 	t_color			color;
 	struct s_plane	*next;
 }			t_plane;
@@ -155,6 +155,9 @@ typedef struct s_hit
 	t_vector	hitpoint;
 	t_vector	normal;
 	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+	int			cylinder_cap;
 }				t_hit;
 
 //Start program
@@ -189,9 +192,16 @@ int			ft_check_rgb_2(char **arr, char **pos, char **vec, char **rgb);
 void		ft_check_size(char **arr, int i, t_data *data, char *l);
 
 // Drawing
+void		ft_setup_camera(t_camera *camera);
 void		ft_draw_scene(t_data *data);
 t_hit		ft_hit_sphere(t_data *data, t_ray ray);
-void		ft_setup_camera(t_camera *camera);
+t_hit		ft_hit_plane(t_data *data, t_ray ray);
+t_hit		ft_hit_cylinder(t_data *data, t_ray ray);
+float		ft_inter_cap(t_cylinder *cylinder, t_ray ray, float comp_t,
+				t_hit *hit);
+int			ft_check_height(t_cylinder *cylinder, t_ray ray, float t);
+void		ft_calculate_normal_c(t_cylinder *cylinder, t_hit *hit);
+void		ft_put_color(t_data *data, int x, int y, t_hit hit);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
@@ -213,13 +223,15 @@ t_vector	ft_subtract(t_vector *v1, t_vector *v2);
 t_vector	ft_scale(t_vector *v, float scale);
 t_vector	ft_normalize(t_vector *v);
 float		ft_dot(t_vector *v1, t_vector *v2);
-int			vector_length(t_vector *v);
+t_vector	ft_cross(t_vector *a, t_vector *b);
+t_vector	ft_perpendicular(t_vector *a, t_vector *b);
+float		ft_vector_length(t_vector *v);
 
-//Utils
+// Other Utils
 void		ft_normalize_whitespace(char *line);
 void		ft_remove_whitespace(char **arr);
 
-//Hooks
+// Hooks
 int			ft_key_handle(int keysym, t_data *data);
 int			ft_mouse_quit(t_data *data);
 

@@ -1,0 +1,25 @@
+A	0.2			               255,255,255
+
+
+# Place a vertical spot, a sphere and a plane. The spot lighting
+# the sphere's position to create a sphere shadow on the plane.
+# Put the camera aside so we can see the sphere, the plane and the
+# sphere's shadow on the plane. The shadow must be properly displayed
+# without glitching.
+
+C	20,5,80 	-0.3,-0.1,-1 50
+L	-40,0,30		0.7
+sp	0,0,0			20 		255,0,0
+pl	0,-10,0		0,1,0			255,255,225
+
+# Put a complex scene together with several objects like on illustration
+# V.6 page 10 of the subject. Shadows must be properly displayed without
+# glitching.
+
+#to be created...
+
+
+
+
+
+

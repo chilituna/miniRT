@@ -6,23 +6,11 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:31:58 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/07 21:30:06 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:37:45 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-// cross priduct of two vectors
-// needed to calculate the right and up vectors
-t_vector	ft_cross(t_vector *a, t_vector *b)
-{
-	t_vector	cross;
-
-	cross.x = a->y * b->z - a->z * b->y;
-	cross.y = a->z * b->x - a->x * b->z;
-	cross.z = a->x * b->y - a->y * b->x;
-	return (cross);
-}
 
 // set up basis vectors
 void	ft_set_camera_vectors(t_camera *camera)

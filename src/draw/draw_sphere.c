@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:05:52 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/07 23:54:52 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/11 11:19:06 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,17 @@ float	ft_discriminant(t_sphere *sphere, t_ray ray)
 	return (b * b - 4.0f * a * c);
 }
 
-void	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
+void	ft_find_closest_s(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 {
-	float		discriminant;
 	float		hit_distance;
 	t_vector	scaled_direction;
 
 	while (sphere)
 	{
-		discriminant = ft_discriminant(sphere, ray);
-		if (discriminant >= 0)
+		hit_distance = ft_discriminant(sphere, ray);
+		if (hit_distance >= 0)
 		{
-			hit_distance = ft_closest_hit_sphere(sphere, ray, discriminant);
+			hit_distance = ft_closest_hit_sphere(sphere, ray, hit_distance);
 			if (hit_distance < t)
 			{
 				t = hit_distance;
@@ -78,6 +77,8 @@ void	ft_find_closest(t_sphere *sphere, t_ray ray, t_hit *hit, float t)
 				hit->normal = ft_subtract(&hit->hitpoint,
 						&hit->sphere->origin);
 				hit->normal = ft_normalize(&hit->normal);
+				hit->plane = NULL;
+				hit->cylinder = NULL;
 			}
 		}
 		sphere = sphere->next;
@@ -94,7 +95,8 @@ t_hit	ft_hit_sphere(t_data *data, t_ray ray)
 	closest_t = INFINITY;
 	hit_result.distance = INFINITY;
 	hit_result.sphere = NULL;
+	hit_result.cylinder = NULL;
 	sphere = data->sphere;
-	ft_find_closest(sphere, ray, &hit_result, closest_t);
+	ft_find_closest_s(sphere, ray, &hit_result, closest_t);
 	return (hit_result);
 }

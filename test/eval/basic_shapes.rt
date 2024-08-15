@@ -1,0 +1,19 @@
+A	0.2			               255,255,255
+
+C	0,0,80 	0,0,-1 50
+L	-40,0,30		0.7
+
+# Place a sphere at the coordinates {0, 0, 0}. With the camera
+# facing the sphere, display the rendered image. The sphere
+# should be visible and displayed without glitching.'
+sp	0,0,0			20 		255,0,0
+
+# Place a plane with a 'z' value of null. Withthe camera
+# facing the plane, display the rendered image. The plane should
+# be visible and displayed without glitching.
+pl	0,-10,0		0,1,0			0,0,225
+
+# Place a cylinder extending along the y axis. With the camera
+# facing the cylinder, display the rendered image. The cylinder
+# should be visible and displayed without glitching.
+cy	20,0,5 	0,1,0	10	30	0,255,0

@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:50:56 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/04 16:48:34 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:23:50 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	ft_set_plane(t_plane *plane, char **pos, char **vec, char **rgb)
 	plane->origin.x = ft_atof(pos[0]);
 	plane->origin.y = ft_atof(pos[1]);
 	plane->origin.z = ft_atof(pos[2]);
-	plane->orientation.x = ft_atof(vec[0]);
-	plane->orientation.y = ft_atof(vec[1]);
-	plane->orientation.z = ft_atof(vec[2]);
+	plane->normal.x = ft_atof(vec[0]);
+	plane->normal.y = ft_atof(vec[1]);
+	plane->normal.z = ft_atof(vec[2]);
 	plane->color.r = ft_atoi(rgb[0]);
 	plane->color.g = ft_atoi(rgb[1]);
 	plane->color.b = ft_atoi(rgb[2]);

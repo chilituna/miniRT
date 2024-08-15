@@ -1,0 +1,19 @@
+A	0.2			               255,255,255
+
+C	0,0,100 	0,0,-1 50
+L	-40,0,30		0.7
+
+# Place several intersecting objects on the scene, such as for example a sphere
+# and a cylinder, and display the rendered image. Both objects should be
+# visible and displayed without glitching. (especially where both object intersect)
+
+# Execute the same test, but ensure it's possible to place the same object
+# several times, for example two cylinders, two spheres and a plane.
+
+pl	0,-10,0		0,1,0			255,0,225
+sp	0,0,0			20 		255,0,0
+cy	0,0,0 	1,0,0	10	40	0,255,0
+sp -20,0,0			10 		255,0,0
+cy 0,0,0 	1,1,-1	2	50	0,255,0
+sp 20,0,10			5 		255,0,0
+

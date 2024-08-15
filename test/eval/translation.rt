@@ -1,0 +1,13 @@
+A	0.2			               255,255,255
+
+C	0,0,80 	0,0,-1 50
+L	-40,0,30		0.7
+
+# Place two spheres at the coordinates {0, 0, 0},
+# the camera facing those spheres. Then put a translation
+# on one of the two spheres oriented in a direction parallel
+# to the camera's, of a greater distance than the sphere's
+# diameter and display the rendered image. Both spheres should
+# be visible and displayed without glitching.
+sp	0,0,0			20 		200,200,0
+sp  22,0,0			20 		200,200,0
