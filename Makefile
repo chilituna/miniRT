@@ -3,20 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/08/12 17:27:25 by aarponen         ###   ########.fr        #
+#    Updated: 2024/08/15 21:47:34 by s.veselova       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#detect OS
+UNAME_S := $(shell uname -s)
 
 # Compiler and compiler flags
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -O3 -g
 
 # MiniLibX library flags
-MLX_PATH = ./minilibx-linux
-MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11
+ifeq ($(UNAME_S),Linux)
+    MLX_PATH = ./minilibx-linux
+    MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11
+	CLEAN_UP_FILE = src/clean_up.c
+	HOOKS = src/hooks.c
+else ifeq ($(UNAME_S),Darwin)
+    MLX_PATH = ./minilibx_opengl_20191021
+    MLX_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
+    MLX_DOWNLOAD = curl -O https://cdn.intra.42.fr/document/document/27026/minilibx_opengl.tgz && tar -xzf minilibx_opengl.tgz && rm minilibx_opengl.tgz
+	CLEAN_UP_FILE = src/clean_up_mac.c
+	HOOKS = src/hooks_mac.c
+endif
 
 # Libft library flags
 LIBFT_PATH = ./Libft
@@ -24,7 +37,7 @@ LIBFT_FLAGS = -L$(LIBFT_PATH) -lft
 
 # Source and object files
 SRC = src/main.c src/init.c src/launch.c \
-	src/clean_up.c src/error_handling.c \
+	src/error_handling.c \
 	src/parsing/parse.c  src/parsing/parse_ambient.c src/parsing/parse_camera.c \
 	src/parsing/parse_light.c src/parsing/parse_sphere.c src/parsing/parse_plane.c \
 	src/parsing/parse_cylinder.c src/parsing/parse_utils.c \
@@ -33,7 +46,7 @@ SRC = src/main.c src/init.c src/launch.c \
 	src/draw/camera_setup.c src/draw/vector_operations.c \
 	src/draw/draw_plane.c src/draw/draw_cylinder.c  src/draw/draw_cylinder2.c \
 	src/draw/color.c \
-	src/utils.c src/hooks.c
+	src/utils.c $(HOOKS) $(CLEAN_UP_FILE)
 OBJ = $(SRC:.c=.o)
 
 # Header files
@@ -47,6 +60,12 @@ all: mlx libft $(NAME)
 
 # Rule to compile MiniLibX
 mlx:
+ifeq ($(UNAME_S),Darwin)
+	@if [ ! -d "$(MLX_PATH)" ]; then \
+		echo "Downloading minilibx for macOS..."; \
+		$(MLX_DOWNLOAD); \
+	fi
+endif
 	make -C $(MLX_PATH)
 
 # Rule to compile Libft
@@ -74,3 +93,5 @@ fclean: clean
 
 # Rule to re-make everything
 re: fclean all
+
+.PHONY: all mlx libft clean fclean re
