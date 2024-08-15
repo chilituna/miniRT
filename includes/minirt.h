@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/12 17:28:11 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/15 21:48:00 by s.veselova       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <X11/keysym.h>
 # include <math.h>
-# include "../minilibx-linux/mlx.h"
+# ifdef __linux__
+#  include <X11/keysym.h>
+#  include "../minilibx-linux/mlx.h"
+# elif defined(__APPLE__)
+#  include <ApplicationServices/ApplicationServices.h>
+#  include "../minilibx_opengl_20191021/mlx.h"
+# endif
 # include "../Libft/libft.h"
 
 # ifndef WIDTH
