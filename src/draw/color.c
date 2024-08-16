@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:08:16 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/10 17:38:11 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/16 23:04:27 by s.veselova       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_put_color(t_data *data, int x, int y, t_hit hit)
 	diffuse = 0.0f;
 	ambient_color = (t_color){0, 0, 0};
 	ft_calculate_ambient_lighting(data, &ambient_color);
-	if (!ft_is_in_shadow(data, &hit.hitpoint, &light_dir))
+	if (!ft_is_in_shadow(data, &hit.hitpoint, &hit.normal, &light_dir))
 		diffuse = ft_calculate_diffuse_lighting(&hit.normal, &light_dir);
 	if (hit.sphere)
 		final_color = ft_sphere_color(hit, diffuse, ambient_color);

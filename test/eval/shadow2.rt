@@ -1,0 +1,13 @@
+A  0.2   255,255,255
+
+# Put a complex scene together with several objects like on illustration
+# V.6 page 10 of the subject. Shadows must be properly displayed without
+# glitching.
+
+C	20,5,80 	-0.3,-0.1,-1 50
+L  -40,0,30   0.7
+
+## Test 1
+sp 0,0,20   20   216,56,136
+pl 0,-10,0   0,1,0   140,118,206
+cy	0,0,0 	0,1,0	10	30	0,255,0
