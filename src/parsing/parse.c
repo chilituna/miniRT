@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/11 19:36:22 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:32:07 by s.veselova       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-// Parse the scene file and store the data in the appropriate structs:
-// A = Ambient lighting (only one)
-// C = Camera (only one)
-// L = Light (only one)
-// sp = Sphere
-// pl = Plane
-// cy = Cylinder
-// Check that all values are within the correct range and return 0 on success
-// Exit with an error message and return 1 on failure
-int	ft_parse_scene(char *file, t_data *data)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		ft_error("Could not open file\n", data);
-	line = NULL;
-	ft_parsing(fd, line, data);
-	close(fd);
-	return (0);
-}
 
 void	ft_check_identifier(char *line, t_data *data)
 {
