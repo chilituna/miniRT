@@ -6,7 +6,7 @@
 /*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/15 21:48:00 by s.veselova       ###   ########.fr       */
+/*   Updated: 2024/08/16 23:10:45 by s.veselova       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ void		ft_calculate_ambient_lighting(t_data *data, t_color *color);
 float		ft_calculate_diffuse_lighting(t_vector *normal,
 				t_vector *light_dir);
 int			ft_is_in_shadow(t_data *data, t_vector *hit_point,
-				t_vector *light_dir);
+				t_vector *normal, t_vector *light_dir);
 
 // Utils vector math
 t_vector	ft_add(t_vector *v1, t_vector *v2);

@@ -8,7 +8,7 @@ C	0,0,80 	0,0,-1 50
 # sphere's shadow on the plane. The shadow must be properly displayed
 # without glitching.
 
-- Put a complex scene together with several objects like on illustration V.6 page 10 of the subject. Shadows must be properly displayed without glitching.
+#Put a complex scene together with several objects like on illustration V.6 page 10 of the subject. Shadows must be properly displayed without glitching.
 L	-40,0,30		0.7
 sp	0,0,0			20 		255,0,0
 
