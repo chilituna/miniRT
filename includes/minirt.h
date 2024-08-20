@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/16 23:10:45 by s.veselova       ###   ########.fr       */
+/*   Updated: 2024/08/20 16:30:52 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void		ft_free_all(t_data *data);
 
 //Parsing
 int			ft_parse_scene(char *file, t_data *data);
-void		ft_parsing(int fd, char *line, t_data *data);
+void		ft_parsing(char *line, t_data *data);
 void		ft_parse_ambient(char *line, t_data *data);
 void		ft_parse_camera(char *line, t_data *data);
 void		ft_parse_light(char *line, t_data *data);

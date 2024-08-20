@@ -12,13 +12,6 @@ L	-40,0,30		0.7
 sp	0,0,0			20 		255,0,0
 pl	0,-10,0		0,1,0			255,255,225
 
-# Put a complex scene together with several objects like on illustration
-# V.6 page 10 of the subject. Shadows must be properly displayed without
-# glitching.
-
-#to be created...
-
-
 
 
 

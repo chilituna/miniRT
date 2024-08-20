@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 22:38:19 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/18 17:32:07 by s.veselova       ###   ########.fr       */
+/*   Updated: 2024/08/20 16:30:43 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 void	ft_check_identifier(char *line, t_data *data)
 {
 	if (line[0] == 'A')
-	{
 		ft_parse_ambient(line, data);
-	}
 	else if (line[0] == 'C')
-	{
 		ft_parse_camera(line, data);
-	}
 	else if (line[0] == 'L')
 		ft_parse_light(line, data);
 	else if (line[0] == 's' && line[1] == 'p')
@@ -35,26 +31,10 @@ void	ft_check_identifier(char *line, t_data *data)
 }
 
 // Parse the scene file line by line:
-void	ft_parsing(int fd, char *line, t_data *data)
+void	ft_parsing(char *line, t_data *data)
 {
-	data->line_count = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-		{
-			if (data->line_count == 0)
-				ft_error("Empty file\n", data);
-			break ;
-		}
-		data->line_count++;
-		if (line[0] == '\n' || line[0] == '#')
-		{
-			free(line);
-			continue ;
-		}
-		else
-			ft_check_identifier(line, data);
-		free(line);
-	}
+	if (line[0] == '\n' || line[0] == '#')
+		return ;
+	else
+		ft_check_identifier(line, data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 17:26:19 by s.veselova        #+#    #+#             */
-/*   Updated: 2024/08/18 17:37:24 by s.veselova       ###   ########.fr       */
+/*   Updated: 2024/08/20 16:33:58 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	ft_parse_file_contents(int fd, t_data *data)
 			free(line);
 			return (0);
 		}
-		ft_parsing(fd, line, data);
+		ft_parsing(line, data);
 		free(line);
 	}
 	return (has_ambient && has_camera && has_light);
@@ -114,7 +114,7 @@ int	ft_parse_scene(char *file, t_data *data)
 	if (!ft_parse_file_contents(fd, data))
 	{
 		close(fd);
-		ft_error("Missing or duplicate required A, C, or L parameters\n", data);
+		ft_error("Missing or duplicate A, C, or L parameters\n", data);
 	}
 	close(fd);
 	return (0);
