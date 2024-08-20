@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 21:04:27 by s0nia             #+#    #+#             */
-/*   Updated: 2024/08/16 23:10:24 by s.veselova       ###   ########.fr       */
+/*   Updated: 2024/08/20 18:49:40 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_is_in_shadow(t_data *data, t_vector *hit_point,
 	float		light_distance;
 	t_vector	offset;
 
-	offset = ft_scale(normal, 0.001f);
+	offset = ft_scale(normal, 0.005f);
 	shadow_ray.origin = ft_add(hit_point, &offset);
 	shadow_ray.direction = *light_dir;
 	shadow_hit.distance = INFINITY;

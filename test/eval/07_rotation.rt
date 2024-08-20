@@ -8,4 +8,4 @@ L	-40,0,30		0.7
 # the cylinder. Then put a 90° rotation (PI/2 radian) along
 # the z axis and display the rendered image. The cylinder
 # should be visible and displayed without glitching.
-cy	0,0,0 	0,0,1	10	20	0,255,0
+cy	0,0,0 	0,1,0	10	20	0,255,0
