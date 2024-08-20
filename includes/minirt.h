@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: sveselov <sveselov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/20 16:30:52 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:11:49 by sveselov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,9 @@ float		ft_inter_cap(t_cylinder *cylinder, t_ray ray, float comp_t,
 int			ft_check_height(t_cylinder *cylinder, t_ray ray, float t);
 void		ft_calculate_normal_c(t_cylinder *cylinder, t_hit *hit);
 void		ft_put_color(t_data *data, int x, int y, t_hit hit);
+void		ft_clamp_color(t_color *color);
+t_color		ft_get_object_color(t_hit hit, float light_intensity,
+				t_color ambient_color);
 
 // Drawing utils
 void		ft_my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
@@ -216,9 +219,12 @@ int			ft_trgb(int t, t_color *color);
 
 // Light
 
+t_color		ft_calculate_lighting(t_data *data, t_hit hit);
 void		ft_calculate_ambient_lighting(t_data *data, t_color *color);
 float		ft_calculate_diffuse_lighting(t_vector *normal,
 				t_vector *light_dir);
+float		ft_calculate_specular_lighting(t_vector *view_dir,
+				t_vector *light_dir, t_vector *normal, float shininess);
 int			ft_is_in_shadow(t_data *data, t_vector *hit_point,
 				t_vector *normal, t_vector *light_dir);
 

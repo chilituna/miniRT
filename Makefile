@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+         #
+#    By: sveselov <sveselov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/08/18 17:33:14 by s.veselova       ###   ########.fr        #
+#    Updated: 2024/08/20 18:11:00 by sveselov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,10 @@ SRC = src/main.c src/init.c src/launch.c \
 	src/parsing/parse_light.c src/parsing/parse_sphere.c src/parsing/parse_plane.c \
 	src/parsing/parse_cylinder.c src/parsing/parse_utils.c src/parsing/parse_file.c \
 	src/draw/draw.c src/draw/draw_sphere.c src/draw/lighting.c \
-	src/draw/draw_utils.c src/draw/vector_operations2.c \
+	src/draw/lighting_utils.c src/draw/draw_utils.c src/draw/vector_operations2.c \
 	src/draw/camera_setup.c src/draw/vector_operations.c \
 	src/draw/draw_plane.c src/draw/draw_cylinder.c  src/draw/draw_cylinder2.c \
-	src/draw/color.c \
+	src/draw/color.c src/draw/color_utils.c \
 	src/utils.c $(HOOKS) $(CLEAN_UP_FILE)
 OBJ = $(SRC:.c=.o)
 
