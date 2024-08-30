@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 17:26:19 by s.veselova        #+#    #+#             */
-/*   Updated: 2024/08/20 16:33:58 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:08:28 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,11 @@ static int	ft_check_required_params(char first_char, int *has_ambient,
 		int *has_camera, int *has_light)
 {
 	if (first_char == 'A')
-	{
-		if (*has_ambient)
-			return (0);
 		*has_ambient = 1;
-	}
 	else if (first_char == 'C')
-	{
-		if (*has_camera)
-			return (0);
 		*has_camera = 1;
-	}
 	else if (first_char == 'L')
-	{
-		if (*has_light)
-			return (0);
 		*has_light = 1;
-	}
 	return (1);
 }
 
@@ -114,7 +102,7 @@ int	ft_parse_scene(char *file, t_data *data)
 	if (!ft_parse_file_contents(fd, data))
 	{
 		close(fd);
-		ft_error("Missing or duplicate A, C, or L parameters\n", data);
+		ft_error("Missing A, C, or L parameters\n", data);
 	}
 	close(fd);
 	return (0);

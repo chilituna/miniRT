@@ -10,4 +10,4 @@ L	-40,0,30		0.7
 # diameter and display the rendered image. Both spheres should
 # be visible and displayed without glitching.
 sp	0,0,0			20 		200,200,0
-sp  22,0,0			20 		200,200,0
+sp  0,0,0			20 		200,200,0

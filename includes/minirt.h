@@ -6,7 +6,7 @@
 /*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:39:01 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/20 16:30:52 by aarponen         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:26:55 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 # include "../Libft/libft.h"
 
 # ifndef WIDTH
-#  define WIDTH 1600
+#  define WIDTH 1200
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 1000
+#  define HEIGHT 800
 # endif
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846

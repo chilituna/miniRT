@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambient.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: s0nia <s0nia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 13:10:46 by aarponen          #+#    #+#             */
-/*   Updated: 2024/08/08 00:09:51 by s0nia            ###   ########.fr       */
+/*   Updated: 2024/08/20 18:19:31 by aarponen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_parse_ambient(char *line, t_data *data)
 	ft_remove_whitespace(arr);
 	ft_check_ambient_ratio(arr, data, line);
 	rgb = ft_split(arr[2], ',');
-	if (ft_check_rgb(rgb, arr))
+	if (ft_check_rgb(arr, rgb))
 		ft_parsing_error("Invalid ambient lighting rgb\n", data, line);
 	ft_set_amblight(data->ambient, arr, rgb);
 	ft_free_array(arr);
