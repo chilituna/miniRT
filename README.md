@@ -13,6 +13,8 @@ Some impressions:
 
 [Cube, created of spheres and cylinders](https://github.com/chilituna/miniRT/blob/main/images/cube.png)
 
+![screenshot](cube.png)
+
 Useful resources:
 - https://raytracing.github.io/books/RayTracingInOneWeekend.html
 - https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
