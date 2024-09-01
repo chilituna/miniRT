@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: s.veselova <s.veselova@student.42.fr>      +#+  +:+       +#+         #
+#    By: aarponen <aarponen@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 18:38:02 by aarponen          #+#    #+#              #
-#    Updated: 2024/08/18 17:33:14 by s.veselova       ###   ########.fr        #
+#    Updated: 2024/09/01 14:41:56 by aarponen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ ifeq ($(UNAME_S),Linux)
     MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11
 	CLEAN_UP_FILE = src/clean_up.c
 	HOOKS = src/hooks.c
+	MLX_DOWNLOAD = git clone https://github.com/42Paris/minilibx-linux.git $(MLX_PATH)
 else ifeq ($(UNAME_S),Darwin)
     MLX_PATH = ./minilibx_opengl_20191021
     MLX_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
@@ -60,6 +61,12 @@ all: mlx libft $(NAME)
 
 # Rule to compile MiniLibX
 mlx:
+ifeq ($(UNAME_S),Linux)
+	@if [ ! -d "$(MLX_PATH)" ] || [ -z "$(shell ls -A $(MLX_PATH))" ]; then \
+		echo "Directory $(MLX_PATH) does not exist or is empty. Cloning minilibx for Linux..."; \
+		$(MLX_DOWNLOAD); \
+	fi
+endif
 ifeq ($(UNAME_S),Darwin)
 	@if [ ! -d "$(MLX_PATH)" ]; then \
 		echo "Downloading minilibx for macOS..."; \
