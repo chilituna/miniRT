@@ -134,3 +134,9 @@ Makefile          Build configuration
 - Structuring rendering projects with clear module boundaries
 - Building robust parsers with strong validation and error handling
 - Collaborating effectively in a pair-programming workflow
+
+---
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
