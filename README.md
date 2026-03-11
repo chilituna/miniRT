@@ -1,131 +1,136 @@
 # miniRT
 
-A lightweight ray tracer written in C, built as part of the 42 Core Curriculum.
+A compact ray tracer in C that renders 3D scenes from a custom `.rt` format using core computer graphics techniques.
 
-This was a **collaborative 2-person project**, developed through pair programming, shared design decisions, and coordinated implementation.
+This repository contains a 42 School pair project focused on foundational real-time rendering concepts.
 
-`miniRT` renders 3D scenes from a textual `.rt` description using fundamental ray tracing techniques (camera rays, intersections, normals, lighting, and shadows).
+- **Score:** 100/100
+- **Pair project repository:** https://github.com/chilituna/miniRT
 
-Project result: **100/100**
+Contributors:
+- [Alise (chilituna)](https://github.com/chilituna)
+- [Sonia (yas0nia)](https://github.com/yas0nia)
 
-## Why This Project
+## Overview
 
-This project demonstrates practical engineering skills that transfer directly to real-world software roles:
+`miniRT` was built to understand how a software renderer works from first principles.
+The project parses a scene description file, casts rays from a virtual camera, computes intersections with geometric primitives, and applies lighting and shadows per pixel.
 
-- Building a non-trivial graphics application in **C** from scratch
-- Translating mathematical concepts into maintainable, production-style code
-- Designing robust input parsing and validation with meaningful error handling
-- Working with low-level rendering pipelines and platform-specific window/event systems
+This project was developed as part of the 42 curriculum and emphasizes:
+- Low-level graphics programming in C
+- 3D math implementation (vectors, normals, ray-object intersections)
+- Defensive parsing and input validation
+- Clean modular architecture for a medium-sized codebase
 
-## Features
+## Demo / Screenshots
 
-- Scene parsing from `.rt` files
-- Supported objects:
-	- Sphere (`sp`)
-	- Plane (`pl`)
-	- Cylinder (`cy`, including caps)
-- Lighting model:
-	- Ambient light
-	- Diffuse (Lambertian) shading
-	- Hard shadows via shadow rays
-- Camera setup with configurable position, orientation, and field of view
-- Basic window/event handling with MiniLibX (`ESC` to exit)
-- Strict input validation (ranges, duplicates, required scene elements)
-
-## Render Previews
-
-Cube (built from spheres and cylinders)
+Cube scene (built from spheres and cylinders)
 ![Cube scene](images/cube.png)
 
-Sphere in a room (planes)
+Ball in room scene (sphere + planar room)
 ![Ball in room scene](images/ball_in_room.png)
 
-Sphere in a tunnel (planes + thin cylinders)
+Tunnel scene (planes and thin cylinders)
 ![Tunnel scene](images/tunnel.png)
 
 ## Tech Stack
 
-- Language: `C`
-- Graphics library: `MiniLibX`
-- Build system: `Makefile`
-- Utility library: custom `Libft`
-- Platforms: Linux and macOS (separate MiniLibX handling in build)
+- **Language:** C
+- **Graphics Library:** MiniLibX
+- **Build Tool:** Makefile
+- **Utility Library:** Libft (custom standard-library helpers)
+- **Platforms:** Linux, macOS
 
-## Project Structure
+## Architecture / Implementation
 
-```text
-includes/        Header files and shared types
-src/parsing/     Scene lexer/parser and input validation
-src/draw/        Ray generation, intersections, lighting, color
-src/             App lifecycle, hooks, initialization, cleanup
-test/            Example and evaluation scenes
-images/          Render screenshots
-```
+The codebase is split by responsibility to keep rendering and parsing logic independent.
 
-## Build and Run
+- **Parsing layer** (`src/parsing/`): reads `.rt` files, validates constraints, and builds scene objects.
+- **Rendering layer** (`src/draw/`): camera ray generation, intersections, lighting, shadows, and final pixel color output.
+- **Application layer** (`src/`): initialization, event hooks, launch loop, and cleanup.
 
-### 1. Clone the repository
+Key technical decisions:
+- Used a straightforward CPU ray-per-pixel pipeline for clarity and correctness.
+- Implemented object intersection routines per primitive (sphere, plane, cylinder) to simplify debugging and extension.
+- Enforced strict scene validation early to fail fast on malformed inputs.
+
+## Features
+
+- Parses custom `.rt` scene files
+- Supports spheres, planes, and cylinders (including caps)
+- Camera with configurable position, orientation, and FOV
+- Ambient + diffuse (Lambertian) lighting
+- Hard shadows via shadow rays
+- Cross-platform build flow for Linux and macOS
+- Basic event handling and clean application shutdown
+
+## Getting Started
+
+### Prerequisites
+
+- Linux or macOS
+- `cc`/`clang`
+- `make`
+
+1. Clone the repository.
 
 ```bash
 git clone https://github.com/chilituna/miniRT.git
 cd miniRT
 ```
 
-### 2. Compile
+2. Build the project.
 
 ```bash
 make
 ```
 
-Notes:
-- On Linux, the Makefile automatically clones `minilibx-linux` if missing.
-- On macOS, the Makefile downloads and extracts the MiniLibX archive if missing.
-
-### 3. Run
+3. Run with a sample scene.
 
 ```bash
 ./miniRT test/eval/05_basic_shapes.rt
 ```
 
-## Scene File Format (`.rt`)
+4. Try additional scenes from `test/eval/` or `test/cool/`.
 
-Required (exactly one each):
+### Minimal scene format
 
+Required identifiers (one each):
 - `A` ambient light
 - `C` camera
 - `L` light source
 
-Optional (zero or more):
-
+Optional objects:
 - `sp` sphere
 - `pl` plane
 - `cy` cylinder
 
-Minimal example:
+## Project Structure
 
 ```text
-A 0.2 255,255,255
-C 0,0,80 0,0,-1 50
-L -40,0,30 0.7
-
-sp 0,0,0 20 255,0,0
-pl 0,-10,0 0,1,0 0,0,225
-cy 20,0,5 0,1,0 10 30 0,255,0
+includes/         Main headers and shared data structures
+Libft/            Custom C utility library
+src/              App lifecycle, init, hooks, cleanup
+src/parsing/      Scene parsing and validation
+src/draw/         Ray tracing, intersections, lighting, color
+test/eval/        Validation-oriented test scenes
+test/cool/        Showcase scenes
+images/           Render output assets
+Makefile          Build configuration
 ```
+
+## Future Improvements
+
+- Add specular highlights and reflection support
+- Introduce anti-aliasing (supersampling)
+- Add multi-threaded rendering for performance
+- Support additional primitives (cone, triangle, mesh)
+- Export rendered frames to image files
 
 ## What I Learned
 
-- Implementing geometric intersection algorithms for multiple primitives
-- Building a per-pixel rendering loop with a clean data flow
-- Debugging floating-point and precision issues in 3D math
-- Designing parser code that fails fast and reports actionable errors
-- Organizing a medium-sized C project for readability and maintainability
-
-## Useful References
-
-- Ray Tracing in One Weekend: foundational concepts for rays, intersections, and materials.
-	https://raytracing.github.io/books/RayTracingInOneWeekend.html
-- The Cherno graphics programming series: practical intuition for math-heavy rendering topics.
-	https://www.youtube.com/playlist?list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
-- Intro-to-graphics video series used to reinforce lighting and camera fundamentals.
-	https://www.youtube.com/playlist?list=PLAqGIYgEAxrUO6ODA0pnLkM2UOijerFPv
+- Implementing foundational ray tracing algorithms in C
+- Translating 3D math into reliable, testable code
+- Structuring rendering projects with clear module boundaries
+- Building robust parsers with strong validation and error handling
+- Collaborating effectively in a pair-programming workflow
