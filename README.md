@@ -1,4 +1,4 @@
-# miniRT
+![miniRT banner](images/miniRT_banner.png)
 
 A compact ray tracer in C that renders 3D scenes from a custom `.rt` format using core computer graphics techniques.
 
